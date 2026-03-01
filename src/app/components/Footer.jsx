@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
+import healthcareIcon from "../../assets/healthcare.png";
 function Footer() {
   return <footer className="bg-white border-t mt-16" style={{ borderColor: "#E2E8F0" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -9,10 +10,8 @@ function Footer() {
   }
           <div className="col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1E5EFF 0%, #00B8D9 100%)" }}>
-                <div className="w-5 h-5 border-2 border-white rounded" />
-              </div>
-              <span className="text-lg" style={{ color: "#0A2540" }}>ASP</span>
+              <img src={healthcareIcon} alt="ASP logo" className="w-8 h-8 rounded-lg object-cover" />
+              <span className="text-lg font-semibold tracking-wide" style={{ color: "#1E5EFF" }}>ASP</span>
             </div>
             <p className="text-sm" style={{ color: "#6B7280" }}>
               Your trusted partner for healthcare essentials and medical supplies across Saudi Arabia.

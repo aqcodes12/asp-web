@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router";
 import { Search, ShoppingCart, Menu } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useState } from "react";
+import healthcareIcon from "../../assets/healthcare.png";
 function Navbar() {
   const { cartCount, setIsCartOpen } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -17,10 +18,8 @@ function Navbar() {
   }
           <Link to="/" className="flex items-center">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1E5EFF 0%, #00B8D9 100%)" }}>
-                <div className="w-5 h-5 border-2 border-white rounded" />
-              </div>
-              <span className="text-xl" style={{ color: "#0A2540" }}>ASP</span>
+              <img src={healthcareIcon} alt="ASP logo" className="w-8 h-8 rounded-lg object-cover" />
+              <span className="text-xl font-semibold tracking-wide" style={{ color: "#1E5EFF" }}>ASP</span>
             </div>
           </Link>
 
