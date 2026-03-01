@@ -11,6 +11,8 @@ function ProductDetailPage() {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [shareMessage, setShareMessage] = useState("");
+  const productImages = Array.isArray(product?.images) && product.images.length > 0 ? product.images : [product?.image].filter(Boolean);
+  const [activeImage, setActiveImage] = useState(productImages[0]);
   if (!product) {
     return <div style={{ backgroundColor: "#F8FAFC", minHeight: "calc(100vh - 64px)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
@@ -81,7 +83,7 @@ Product Link: ${window.location.href}`;
         {
     /* Product Details */
   }
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 mb-16">
+        <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 mb-16">
           {
     /* Product Image */
   }
@@ -90,14 +92,24 @@ Product Link: ${window.location.href}`;
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.5 }}
   >
-            <div className="bg-white rounded-2xl overflow-hidden sticky top-24" style={{ border: "1px solid #E2E8F0" }}>
-              <div className="aspect-square" style={{ backgroundColor: "#F8FAFC" }}>
+            <div className="bg-white rounded-2xl overflow-hidden sticky top-24 p-4" style={{ border: "1px solid #E2E8F0", boxShadow: "0 8px 20px rgba(15, 23, 42, 0.08)" }}>
+              <div className="aspect-[5/4] rounded-xl overflow-hidden" style={{ backgroundColor: "#F8FAFC" }}>
                 <img
-    src={product.image}
+    src={activeImage}
     alt={product.name}
     className="w-full h-full object-cover"
   />
               </div>
+              {productImages.length > 1 && <div className="grid grid-cols-4 gap-3 mt-4">
+                  {productImages.map((image, index) => <button
+      key={`${image}-${index}`}
+      onClick={() => setActiveImage(image)}
+      className="aspect-square rounded-lg overflow-hidden border-2 transition-colors"
+      style={{ borderColor: activeImage === image ? "#1E5EFF" : "#E2E8F0" }}
+    >
+                      <img src={image} alt={`${product.name} view ${index + 1}`} className="w-full h-full object-cover" />
+                    </button>)}
+                </div>}
             </div>
           </motion.div>
 
@@ -109,9 +121,9 @@ Product Link: ${window.location.href}`;
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.5 }}
   >
-            <div className="bg-white rounded-2xl p-8" style={{ border: "1px solid #E2E8F0" }}>
+            <div className="bg-white rounded-2xl p-8" style={{ border: "1px solid #E2E8F0", boxShadow: "0 8px 20px rgba(15, 23, 42, 0.08)" }}>
               <h1 className="mb-3" style={{ color: "#0A2540" }}>{product.name}</h1>
-              <p className="text-lg mb-2" style={{ color: "#6B7280" }}>Product Code: {product.code}</p>
+              <p className="text-sm mb-3" style={{ color: "#9CA3AF" }}>Product Code: {product.code}</p>
               <p className="inline-block px-3 py-1 rounded-lg text-sm mb-6 capitalize" style={{ backgroundColor: "#E6F7FB", color: "#00B8D9" }}>
                 {product.category.replace("-", " ")}
               </p>
@@ -129,15 +141,15 @@ Product Link: ${window.location.href}`;
                 <div className="flex items-center gap-4">
                   <button
     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-    className="w-12 h-12 rounded-xl flex items-center justify-center transition-colors"
+    className="w-14 h-14 rounded-xl flex items-center justify-center transition-colors"
     style={{ backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0" }}
   >
                     <Minus className="w-5 h-5" style={{ color: "#6B7280" }} />
                   </button>
-                  <span className="text-2xl w-16 text-center" style={{ color: "#1F2937" }}>{quantity}</span>
+                  <span className="text-3xl w-20 text-center" style={{ color: "#1F2937" }}>{quantity}</span>
                   <button
     onClick={() => setQuantity(quantity + 1)}
-    className="w-12 h-12 rounded-xl flex items-center justify-center transition-colors"
+    className="w-14 h-14 rounded-xl flex items-center justify-center transition-colors"
     style={{ backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0" }}
   >
                     <Plus className="w-5 h-5" style={{ color: "#6B7280" }} />
@@ -203,6 +215,7 @@ Product Link: ${window.location.href}`;
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct, index) => <motion.div
     key={relatedProduct.id}
+    className="h-full"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.4, delay: index * 0.1 }}

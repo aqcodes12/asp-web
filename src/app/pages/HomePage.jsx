@@ -14,7 +14,7 @@ function HomePage() {
       <section
     className="relative overflow-hidden"
     style={{
-      background: "linear-gradient(135deg, #1E5EFF 0%, #00B8D9 100%)"
+      background: "linear-gradient(135deg, #0F4DFF 0%, #00C9F5 100%)"
     }}
   >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
@@ -23,7 +23,7 @@ function HomePage() {
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6 }}
-    className="text-4xl md:text-5xl lg:text-6xl mb-6"
+    className="text-4xl md:text-5xl lg:text-6xl mb-8"
     style={{ color: "white" }}
   >
               One Stop Source for Healthcare Essentials
@@ -32,7 +32,7 @@ function HomePage() {
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, delay: 0.1 }}
-    className="text-lg md:text-xl mb-8"
+    className="text-lg md:text-xl mb-10"
     style={{ color: "rgba(255, 255, 255, 0.9)" }}
   >
               Premium medical supplies and equipment for healthcare professionals across Saudi Arabia. Quality products, reliable service, and competitive pricing.
@@ -45,7 +45,7 @@ function HomePage() {
   >
               <Link
     to="/products"
-    className="px-8 py-4 rounded-xl flex items-center gap-2 transition-all hover:opacity-90"
+    className="px-8 py-4 rounded-2xl flex items-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-lg"
     style={{ backgroundColor: "white", color: "#1E5EFF" }}
   >
                 <span>View Products</span>
@@ -53,7 +53,7 @@ function HomePage() {
               </Link>
               <Link
     to="/contact"
-    className="px-8 py-4 rounded-xl flex items-center gap-2 transition-all hover:opacity-90"
+    className="px-8 py-4 rounded-2xl flex items-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-lg"
     style={{ backgroundColor: "#00B8D9", color: "white" }}
   >
                 <span>Contact Us</span>
@@ -66,7 +66,7 @@ function HomePage() {
       {
     /* Product Categories */
   }
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
           <h2 className="mb-4" style={{ color: "#0A2540" }}>Browse by Category</h2>
           <p style={{ color: "#6B7280" }}>Find exactly what you need from our comprehensive range</p>
@@ -87,7 +87,7 @@ function HomePage() {
       {
     /* Featured Products */
   }
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
           <h2 className="mb-4" style={{ color: "#0A2540" }}>Featured Products</h2>
           <p style={{ color: "#6B7280" }}>Our most popular medical supplies and equipment</p>
@@ -96,6 +96,7 @@ function HomePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {featuredProducts.map((product, index) => <motion.div
     key={product.id}
+    className="h-full"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.4, delay: index * 0.05 }}
@@ -120,7 +121,7 @@ function HomePage() {
     /* About Preview Section */
   }
       <section style={{ backgroundColor: "#E6F7FB" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="mb-6" style={{ color: "#0A2540" }}>
@@ -185,7 +186,7 @@ function HomePage() {
       {
     /* Contact Preview */
   }
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="bg-white rounded-2xl p-8 md:p-12 text-center" style={{ boxShadow: "0 4px 16px rgba(0, 0, 0, 0.05)" }}>
           <h2 className="mb-4" style={{ color: "#0A2540" }}>
             Ready to Get Started?

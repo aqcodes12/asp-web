@@ -72,12 +72,12 @@ function ProductsPage() {
           </div>
         </div>
 
-        <div className="lg:grid lg:grid-cols-4 lg:gap-8">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           {
     /* Sidebar - Desktop */
   }
-          <div className="hidden lg:block">
-            <div className="bg-white rounded-xl p-6 sticky top-24" style={{ border: "1px solid #E2E8F0" }}>
+          <div className="hidden lg:block lg:col-span-3">
+            <div className="bg-white rounded-2xl p-6 sticky top-24" style={{ border: "1px solid #E2E8F0", boxShadow: "0 4px 14px rgba(15, 23, 42, 0.06)" }}>
               {
     /* Categories */
   }
@@ -133,7 +133,7 @@ function ProductsPage() {
           {
     /* Mobile Filters Button */
   }
-          <div className="lg:hidden mb-6">
+          <div className="lg:hidden mb-8">
             <button
     onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
     className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl"
@@ -143,7 +143,7 @@ function ProductsPage() {
               <span>Filters & Sort</span>
             </button>
 
-            {mobileFiltersOpen && <div className="mt-4 bg-white rounded-xl p-6" style={{ border: "1px solid #E2E8F0" }}>
+            {mobileFiltersOpen && <div className="mt-4 bg-white rounded-2xl p-6" style={{ border: "1px solid #E2E8F0", boxShadow: "0 4px 14px rgba(15, 23, 42, 0.06)" }}>
                 {
     /* Categories */
   }
@@ -205,8 +205,8 @@ function ProductsPage() {
           {
     /* Products Grid */
   }
-          <div className="lg:col-span-3">
-            {filteredProducts.length === 0 ? <div className="bg-white rounded-xl p-12 text-center" style={{ border: "1px solid #E2E8F0" }}>
+          <div className="lg:col-span-9">
+            {filteredProducts.length === 0 ? <div className="bg-white rounded-2xl p-12 text-center" style={{ border: "1px solid #E2E8F0", boxShadow: "0 4px 14px rgba(15, 23, 42, 0.06)" }}>
                 <p style={{ color: "#6B7280" }}>No products found matching your criteria.</p>
               </div> : <>
                 <div className="mb-6">
@@ -214,9 +214,10 @@ function ProductsPage() {
                     Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""}
                   </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
                   {filteredProducts.map((product, index) => <motion.div
     key={product.id}
+    className="h-full"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.4, delay: index * 0.03 }}

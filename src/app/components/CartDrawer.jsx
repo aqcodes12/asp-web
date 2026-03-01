@@ -43,7 +43,7 @@ function OrderFormModal({ isOpen, onClose, onSubmit }) {
     exit={{ opacity: 0, scale: 0.95, y: 20 }}
     className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-50"
   >
-            <div className="bg-white rounded-xl p-6 mx-4" style={{ boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)" }}>
+            <div className="bg-white rounded-2xl p-8 mx-4" style={{ boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)" }}>
               <div className="flex justify-between items-center mb-6">
                 <h2 style={{ color: "#0A2540" }}>Submit Order Inquiry</h2>
                 <button onClick={onClose} className="hover:opacity-70">
@@ -51,7 +51,7 @@ function OrderFormModal({ isOpen, onClose, onSubmit }) {
                 </button>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
                   <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
                     Customer Name *
@@ -167,6 +167,7 @@ function OrderFormModal({ isOpen, onClose, onSubmit }) {
 function CartDrawer() {
   const { cartItems, isCartOpen, setIsCartOpen, updateQuantity, removeFromCart, clearCart } = useCart();
   const [showOrderForm, setShowOrderForm] = useState(false);
+  const subtotalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const handleSubmitOrder = (formData) => {
     console.log("Order submitted:", { formData, items: cartItems });
     alert("Order inquiry submitted successfully! We will contact you shortly.");
@@ -223,11 +224,11 @@ function CartDrawer() {
                       <X className="w-10 h-10" style={{ color: "#00B8D9" }} />
                     </div>
                     <p style={{ color: "#6B7280" }}>Your cart is empty</p>
-                  </div> : <div className="space-y-4">
+                  </div> : <div className="space-y-5">
                     {cartItems.map((item) => <div
     key={item.id}
-    className="flex gap-4 p-4 rounded-xl"
-    style={{ backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0" }}
+    className="flex gap-4 p-5 rounded-2xl"
+    style={{ backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0", boxShadow: "0 2px 8px rgba(15, 23, 42, 0.05)" }}
   >
                         <img
     src={item.image}
@@ -272,6 +273,10 @@ function CartDrawer() {
     /* Footer */
   }
               {cartItems.length > 0 && <div className="p-6 border-t" style={{ borderColor: "#E2E8F0" }}>
+                  <div className="flex items-center justify-between mb-4 px-1">
+                    <span style={{ color: "#6B7280" }}>Subtotal</span>
+                    <span style={{ color: "#0A2540" }}>{subtotalItems} item{subtotalItems !== 1 ? "s" : ""}</span>
+                  </div>
                   <button
     onClick={() => setShowOrderForm(true)}
     className="w-full py-3 rounded-xl transition-all hover:opacity-90"

@@ -6,13 +6,11 @@ import healthcareIcon from "../../assets/healthcare.png";
 function Navbar() {
   const { cartCount, setIsCartOpen } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const getNavLinkClassName = ({ isActive }) => `transition-colors ${isActive ? "font-semibold" : ""}`;
-  const getNavLinkStyle = ({ isActive }) => ({
-    color: isActive ? "#1E5EFF" : "#1F2937"
-  });
+  const getDesktopNavLinkClassName = ({ isActive }) => `transition-colors ${isActive ? "font-semibold text-[#1E5EFF]" : "text-[#1F2937] hover:text-[#00B8D9]"}`;
+  const getMobileNavLinkClassName = ({ isActive }) => `py-2 transition-colors ${isActive ? "font-semibold text-[#1E5EFF]" : "text-[#1F2937] hover:text-[#00B8D9]"}`;
   return <nav className="bg-white border-b sticky top-0 z-50" style={{ borderColor: "#E2E8F0" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-[72px]">
           {
     /* Logo */
   }
@@ -27,16 +25,16 @@ function Navbar() {
     /* Desktop Menu */
   }
           <div className="hidden md:flex items-center gap-8">
-            <NavLink to="/" end className={getNavLinkClassName} style={getNavLinkStyle}>
+            <NavLink to="/" end className={getDesktopNavLinkClassName}>
               Home
             </NavLink>
-            <NavLink to="/products" className={getNavLinkClassName} style={getNavLinkStyle}>
+            <NavLink to="/products" className={getDesktopNavLinkClassName}>
               Products
             </NavLink>
-            <NavLink to="/about" className={getNavLinkClassName} style={getNavLinkStyle}>
+            <NavLink to="/about" className={getDesktopNavLinkClassName}>
               About
             </NavLink>
-            <NavLink to="/contact" className={getNavLinkClassName} style={getNavLinkStyle}>
+            <NavLink to="/contact" className={getDesktopNavLinkClassName}>
               Contact
             </NavLink>
           </div>
@@ -54,7 +52,7 @@ function Navbar() {
   >
               <ShoppingCart className="w-5 h-5" style={{ color: "#6B7280" }} />
               {cartCount > 0 && <span
-    className="absolute -top-2 -right-2 w-5 h-5 rounded-full text-white text-xs flex items-center justify-center"
+    className="absolute -top-2.5 -right-2.5 min-w-5 h-5 px-1 rounded-full text-white text-xs font-semibold flex items-center justify-center"
     style={{ backgroundColor: "#1E5EFF" }}
   >
                   {cartCount}
@@ -77,32 +75,28 @@ function Navbar() {
               <NavLink
     to="/"
     end
-    className={({ isActive }) => `py-2 ${isActive ? "font-semibold" : ""}`}
-    style={getNavLinkStyle}
+    className={getMobileNavLinkClassName}
     onClick={() => setMobileMenuOpen(false)}
   >
                 Home
               </NavLink>
               <NavLink
     to="/products"
-    className={({ isActive }) => `py-2 ${isActive ? "font-semibold" : ""}`}
-    style={getNavLinkStyle}
+    className={getMobileNavLinkClassName}
     onClick={() => setMobileMenuOpen(false)}
   >
                 Products
               </NavLink>
               <NavLink
     to="/about"
-    className={({ isActive }) => `py-2 ${isActive ? "font-semibold" : ""}`}
-    style={getNavLinkStyle}
+    className={getMobileNavLinkClassName}
     onClick={() => setMobileMenuOpen(false)}
   >
                 About
               </NavLink>
               <NavLink
     to="/contact"
-    className={({ isActive }) => `py-2 ${isActive ? "font-semibold" : ""}`}
-    style={getNavLinkStyle}
+    className={getMobileNavLinkClassName}
     onClick={() => setMobileMenuOpen(false)}
   >
                 Contact

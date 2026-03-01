@@ -34,26 +34,26 @@ function ProductCard({ product }) {
       }
     }
   };
-  return <Link to={`/products/${product.id}`}>
+  return <Link to={`/products/${product.id}`} className="block h-full">
       <motion.div
-    className="bg-white rounded-xl overflow-hidden cursor-pointer h-full flex flex-col"
+    className="bg-white rounded-2xl overflow-hidden cursor-pointer h-full flex flex-col group"
     style={{
       border: isHovered ? "1px solid #00B8D9" : "1px solid #E2E8F0",
-      boxShadow: isHovered ? "0 8px 20px rgba(30, 94, 255, 0.1)" : "0 2px 8px rgba(0, 0, 0, 0.05)"
+      boxShadow: isHovered ? "0 14px 32px rgba(30, 94, 255, 0.14)" : "0 4px 14px rgba(15, 23, 42, 0.06)"
     }}
     onMouseEnter={() => setIsHovered(true)}
     onMouseLeave={() => setIsHovered(false)}
-    whileHover={{ y: -4 }}
-    transition={{ duration: 0.2 }}
+    whileHover={{ y: -5 }}
+    transition={{ duration: 0.22, ease: "easeOut" }}
   >
         {
     /* Product Image */
   }
-        <div className="relative aspect-square overflow-hidden" style={{ backgroundColor: "#F8FAFC" }}>
+        <div className="relative aspect-[4/3] overflow-hidden" style={{ backgroundColor: "#F8FAFC" }}>
           <img
     src={product.image}
     alt={product.name}
-    className="w-full h-full object-cover"
+    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
   />
           <button
     onClick={handleShare}
@@ -66,7 +66,7 @@ function ProductCard({ product }) {
         {
     /* Product Info */
   }
-        <div className="p-4 flex-1 flex flex-col">
+        <div className="p-5 flex-1 flex flex-col">
           <h3 className="mb-1" style={{ color: "#0A2540" }}>{product.name}</h3>
           <p className="text-sm mb-2" style={{ color: "#6B7280" }}>Code: {product.code}</p>
           <p className="text-xs mb-4 capitalize" style={{ color: "#00B8D9" }}>{product.category.replace("-", " ")}</p>
@@ -107,7 +107,7 @@ function ProductCard({ product }) {
   }
             <button
     onClick={handleAddToCart}
-    className="w-full py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all hover:opacity-90"
+    className="w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-all hover:opacity-90"
     style={{ backgroundColor: "#1E5EFF", color: "white" }}
   >
               <ShoppingCart className="w-4 h-4" />

@@ -25,22 +25,22 @@ function CategoryCard({ id, name, icon }) {
     className="bg-white rounded-xl p-6 cursor-pointer h-full"
     style={{
       border: "1px solid #E2E8F0",
-      boxShadow: isHovered ? "0 8px 20px rgba(30, 94, 255, 0.1)" : "0 2px 8px rgba(0, 0, 0, 0.05)"
+      boxShadow: isHovered ? "0 14px 30px rgba(30, 94, 255, 0.14)" : "0 4px 14px rgba(15, 23, 42, 0.06)"
     }}
     onMouseEnter={() => setIsHovered(true)}
     onMouseLeave={() => setIsHovered(false)}
-    whileHover={{ y: -4 }}
-    transition={{ duration: 0.2 }}
+    whileHover={{ y: -6 }}
+    transition={{ duration: 0.22, ease: "easeOut" }}
   >
         <div className="flex flex-col items-center text-center gap-4">
           <div
-    className="w-16 h-16 rounded-xl flex items-center justify-center transition-all"
+    className="w-[72px] h-[72px] rounded-2xl flex items-center justify-center transition-all"
     style={{
       backgroundColor: isHovered ? "#1E5EFF" : "#E6F7FB"
     }}
   >
             <Icon
-    className="w-8 h-8"
+    className="w-9 h-9"
     style={{ color: isHovered ? "white" : "#00B8D9" }}
   />
           </div>

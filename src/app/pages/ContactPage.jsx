@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { Phone, MapPin, Send } from "lucide-react";
 import { motion } from "motion/react";
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -47,72 +47,40 @@ function ContactPage() {
     /* Contact Info & Form */
   }
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {
-    /* Contact Information */
-  }
+        <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="grid md:grid-cols-2 gap-6 mb-8"
+  >
+          <div className="bg-white p-6 rounded-xl" style={{ border: "1px solid #E2E8F0" }}>
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "#E6F7FB" }}>
+              <Phone className="w-6 h-6" style={{ color: "#1E5EFF" }} />
+            </div>
+            <h3 className="mb-3" style={{ color: "#0A2540" }}>Contact us</h3>
+            <div className="space-y-2" style={{ color: "#1F2937" }}>
+              <p>Telephone: +966-13-814 1130</p>
+              <p>TeleFax: +966-13-814 4588</p>
+              <p>E-mail: info@aspksa.com</p>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-xl" style={{ border: "1px solid #E2E8F0" }}>
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "#E6F7FB" }}>
+              <MapPin className="w-6 h-6" style={{ color: "#00B8D9" }} />
+            </div>
+            <h3 className="mb-3" style={{ color: "#0A2540" }}>Visit us</h3>
+            <p style={{ color: "#1F2937" }}>
+              No. 2, Ultra Business Center, Saud Faisal Road, Khalidiyah, Dammam-32225, KSA.
+            </p>
+          </div>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
           <motion.div
     initial={{ opacity: 0, x: -20 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.6 }}
-    className="lg:col-span-1 space-y-6"
-  >
-            <div className="bg-white p-6 rounded-xl" style={{ border: "1px solid #E2E8F0" }}>
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "#E6F7FB" }}>
-                <Phone className="w-6 h-6" style={{ color: "#1E5EFF" }} />
-              </div>
-              <h3 className="mb-2" style={{ color: "#0A2540" }}>Phone</h3>
-              <p style={{ color: "#1F2937" }}>+966 11 234 5678</p>
-              <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
-                Monday - Saturday, 8AM - 6PM
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl" style={{ border: "1px solid #E2E8F0" }}>
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "#E6F7FB" }}>
-                <Mail className="w-6 h-6" style={{ color: "#00B8D9" }} />
-              </div>
-              <h3 className="mb-2" style={{ color: "#0A2540" }}>Email</h3>
-              <p style={{ color: "#1F2937" }}>info@medsupplypro.sa</p>
-              <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
-                We'll respond within 24 hours
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl" style={{ border: "1px solid #E2E8F0" }}>
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "#E6F7FB" }}>
-                <MapPin className="w-6 h-6" style={{ color: "#1E5EFF" }} />
-              </div>
-              <h3 className="mb-2" style={{ color: "#0A2540" }}>Address</h3>
-              <p style={{ color: "#1F2937" }}>
-                Medical Supplies District<br />
-                King Fahd Road<br />
-                Riyadh 12345, Saudi Arabia
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl" style={{ border: "1px solid #E2E8F0" }}>
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "#E6F7FB" }}>
-                <Clock className="w-6 h-6" style={{ color: "#00B8D9" }} />
-              </div>
-              <h3 className="mb-2" style={{ color: "#0A2540" }}>Business Hours</h3>
-              <p style={{ color: "#1F2937" }}>
-                Monday - Thursday: 8:00 AM - 6:00 PM<br />
-                Friday: Closed<br />
-                Saturday: 9:00 AM - 3:00 PM<br />
-                Sunday: Closed
-              </p>
-            </div>
-          </motion.div>
-
-          {
-    /* Contact Form */
-  }
-          <motion.div
-    initial={{ opacity: 0, x: 20 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.6 }}
-    className="lg:col-span-2"
   >
             <div className="bg-white p-8 rounded-xl" style={{ border: "1px solid #E2E8F0" }}>
               <h2 className="mb-6" style={{ color: "#0A2540" }}>Send us a Message</h2>
@@ -253,6 +221,24 @@ function ContactPage() {
               </form>
             </div>
           </motion.div>
+
+          <motion.div
+    initial={{ opacity: 0, x: 20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6 }}
+  >
+            <div className="bg-white p-4 sm:p-6 rounded-xl" style={{ border: "1px solid #E2E8F0" }}>
+              <h3 className="mb-4" style={{ color: "#0A2540" }}>Location Map</h3>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3574.040854970368!2d50.1665878!3d26.389867699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49e56c380d3d53%3A0x87225b79c2ee99a7!2sUltra%20Industrial%20Services%20(UIS)!5e0!3m2!1sen!2sin!4v1772381347110!5m2!1sen!2sin"
+                style={{ border: 0, width: "100%", minHeight: "420px" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="ASP location map"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -267,12 +253,12 @@ function ContactPage() {
               For urgent orders and emergency supply requests, please call our hotline
             </p>
             <a
-    href="tel:+966112345678"
+    href="tel:+966138141130"
     className="inline-flex items-center gap-2 px-8 py-4 rounded-xl transition-all hover:opacity-90"
     style={{ backgroundColor: "#1E5EFF", color: "white" }}
   >
               <Phone className="w-5 h-5" />
-              <span className="text-lg">+966 11 234 5678</span>
+              <span className="text-lg">+966-13-814 1130</span>
             </a>
           </div>
         </div>
