@@ -13,7 +13,7 @@ function AboutPage() {
     transition={{ duration: 0.6 }}
     className="max-w-3xl mx-auto text-center"
   >
-            <h1 className="mb-6" style={{ color: "#0A2540" }}>About MedSupply Pro</h1>
+            <h1 className="mb-6" style={{ color: "#0A2540" }}>About ASP</h1>
             <p className="text-lg" style={{ color: "#1F2937" }}>
               Your trusted partner in medical supplies, serving healthcare professionals across Saudi Arabia for over 15 years.
             </p>
@@ -33,7 +33,7 @@ function AboutPage() {
   >
             <h2 className="mb-6" style={{ color: "#0A2540" }}>Our Mission</h2>
             <p className="mb-4" style={{ color: "#1F2937" }}>
-              At MedSupply Pro, we are committed to providing healthcare facilities with the highest quality medical supplies and equipment. Our mission is to support healthcare professionals by ensuring they have access to reliable, certified products when they need them most.
+              At ASP, we are committed to providing healthcare facilities with the highest quality medical supplies and equipment. Our mission is to support healthcare professionals by ensuring they have access to reliable, certified products when they need them most.
             </p>
             <p style={{ color: "#1F2937" }}>
               We understand the critical nature of medical supplies in saving lives and improving patient care. That's why we maintain rigorous quality standards and work only with certified manufacturers and suppliers.
@@ -181,7 +181,7 @@ function AboutPage() {
   }
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-12">
-          <h2 className="mb-4" style={{ color: "#0A2540" }}>Why Choose MedSupply Pro?</h2>
+          <h2 className="mb-4" style={{ color: "#0A2540" }}>Why Choose ASP?</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">

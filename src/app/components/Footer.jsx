@@ -12,7 +12,7 @@ function Footer() {
               <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1E5EFF 0%, #00B8D9 100%)" }}>
                 <div className="w-5 h-5 border-2 border-white rounded" />
               </div>
-              <span className="text-lg" style={{ color: "#0A2540" }}>MedSupply Pro</span>
+              <span className="text-lg" style={{ color: "#0A2540" }}>ASP</span>
             </div>
             <p className="text-sm" style={{ color: "#6B7280" }}>
               Your trusted partner for healthcare essentials and medical supplies across Saudi Arabia.
@@ -88,7 +88,7 @@ function Footer() {
   }
         <div className="border-t mt-8 pt-8" style={{ borderColor: "#E2E8F0" }}>
           <p className="text-sm text-center" style={{ color: "#6B7280" }}>
-            © 2026 MedSupply Pro. All rights reserved.
+            © 2026 ASP. All rights reserved.
           </p>
         </div>
       </div>

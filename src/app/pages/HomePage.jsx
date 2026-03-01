@@ -127,7 +127,7 @@ function HomePage() {
                 Your Trusted Medical Supply Partner
               </h2>
               <p className="mb-6" style={{ color: "#1F2937" }}>
-                MedSupply Pro has been serving healthcare facilities across Saudi Arabia for over 15 years. We specialize in providing high-quality medical equipment, surgical instruments, and healthcare supplies to hospitals, clinics, and medical professionals.
+                ASP has been serving healthcare facilities across Saudi Arabia for over 15 years. We specialize in providing high-quality medical equipment, surgical instruments, and healthcare supplies to hospitals, clinics, and medical professionals.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
