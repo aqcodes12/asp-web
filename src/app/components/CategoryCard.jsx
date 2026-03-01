@@ -20,9 +20,9 @@ const iconMap = {
 function CategoryCard({ id, name, icon }) {
   const [isHovered, setIsHovered] = useState(false);
   const Icon = iconMap[icon] || Heart;
-  return <Link to={`/products?category=${id}`}>
+  return <Link to={`/products?category=${id}`} className="block h-full">
       <motion.div
-    className="bg-white rounded-xl p-6 cursor-pointer"
+    className="bg-white rounded-xl p-6 cursor-pointer h-full"
     style={{
       border: "1px solid #E2E8F0",
       boxShadow: isHovered ? "0 8px 20px rgba(30, 94, 255, 0.1)" : "0 2px 8px rgba(0, 0, 0, 0.05)"
@@ -45,7 +45,7 @@ function CategoryCard({ id, name, icon }) {
   />
           </div>
           <h3
-    className="text-sm transition-colors"
+    className="text-sm transition-colors min-h-10 flex items-center justify-center leading-snug"
     style={{ color: isHovered ? "#1E5EFF" : "#0A2540" }}
   >
             {name}
