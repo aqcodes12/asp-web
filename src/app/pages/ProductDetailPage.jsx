@@ -11,7 +11,16 @@ function ProductDetailPage() {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [shareMessage, setShareMessage] = useState("");
-  const productImages = Array.isArray(product?.images) && product.images.length > 0 ? product.images : [product?.image].filter(Boolean);
+  const productImages = (() => {
+    if (!product) {
+      return [];
+    }
+    const explicitImages = Array.isArray(product.images) ? product.images : [];
+    const categoryImages = products
+      .filter((p) => p.category === product.category)
+      .map((p) => p.image);
+    return [...new Set([product.image, ...explicitImages, ...categoryImages])].slice(0, 5);
+  })();
   const [activeImage, setActiveImage] = useState(productImages[0]);
   const sizeOptions = ["S", "M", "L", "XL"];
   const colorOptions = [
