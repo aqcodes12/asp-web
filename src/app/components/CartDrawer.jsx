@@ -238,6 +238,11 @@ function CartDrawer() {
                         <div className="flex-1 min-w-0">
                           <h4 className="mb-1 truncate" style={{ color: "#0A2540" }}>{item.name}</h4>
                           <p className="text-xs mb-2" style={{ color: "#6B7280" }}>Code: {item.code}</p>
+                          {(item.size || item.color) && <p className="text-xs mb-2" style={{ color: "#6B7280" }}>
+                              {item.size ? `Size: ${item.size}` : ""}
+                              {item.size && item.color ? " | " : ""}
+                              {item.color ? `Color: ${item.color}` : ""}
+                            </p>}
                           
                           <div className="flex items-center gap-2">
                             <button

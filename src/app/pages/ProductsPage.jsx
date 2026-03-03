@@ -88,8 +88,10 @@ function ProductsPage() {
     onClick={() => handleCategoryChange("all")}
     className="w-full text-left px-4 py-2.5 rounded-lg transition-colors"
     style={{
-      backgroundColor: selectedCategory === "all" ? "#E6F7FB" : "transparent",
-      color: selectedCategory === "all" ? "#1E5EFF" : "#1F2937"
+      backgroundColor: selectedCategory === "all" ? "#EAF2FF" : "transparent",
+      color: selectedCategory === "all" ? "#2F6FED" : "#1F2937",
+      fontWeight: selectedCategory === "all" ? 600 : 400,
+      borderLeft: selectedCategory === "all" ? "3px solid #2F6FED" : "3px solid transparent"
     }}
   >
                     All Products
@@ -99,8 +101,10 @@ function ProductsPage() {
     onClick={() => handleCategoryChange(category.id)}
     className="w-full text-left px-4 py-2.5 rounded-lg transition-colors"
     style={{
-      backgroundColor: selectedCategory === category.id ? "#E6F7FB" : "transparent",
-      color: selectedCategory === category.id ? "#1E5EFF" : "#1F2937"
+      backgroundColor: selectedCategory === category.id ? "#EAF2FF" : "transparent",
+      color: selectedCategory === category.id ? "#2F6FED" : "#1F2937",
+      fontWeight: selectedCategory === category.id ? 600 : 400,
+      borderLeft: selectedCategory === category.id ? "3px solid #2F6FED" : "3px solid transparent"
     }}
   >
                       {category.name}
@@ -157,8 +161,10 @@ function ProductsPage() {
     }}
     className="w-full text-left px-4 py-2.5 rounded-lg transition-colors"
     style={{
-      backgroundColor: selectedCategory === "all" ? "#E6F7FB" : "transparent",
-      color: selectedCategory === "all" ? "#1E5EFF" : "#1F2937"
+      backgroundColor: selectedCategory === "all" ? "#EAF2FF" : "transparent",
+      color: selectedCategory === "all" ? "#2F6FED" : "#1F2937",
+      fontWeight: selectedCategory === "all" ? 600 : 400,
+      borderLeft: selectedCategory === "all" ? "3px solid #2F6FED" : "3px solid transparent"
     }}
   >
                       All Products
@@ -171,8 +177,10 @@ function ProductsPage() {
     }}
     className="w-full text-left px-4 py-2.5 rounded-lg transition-colors"
     style={{
-      backgroundColor: selectedCategory === category.id ? "#E6F7FB" : "transparent",
-      color: selectedCategory === category.id ? "#1E5EFF" : "#1F2937"
+      backgroundColor: selectedCategory === category.id ? "#EAF2FF" : "transparent",
+      color: selectedCategory === category.id ? "#2F6FED" : "#1F2937",
+      fontWeight: selectedCategory === category.id ? 600 : 400,
+      borderLeft: selectedCategory === category.id ? "3px solid #2F6FED" : "3px solid transparent"
     }}
   >
                         {category.name}

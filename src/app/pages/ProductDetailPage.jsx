@@ -13,6 +13,14 @@ function ProductDetailPage() {
   const [shareMessage, setShareMessage] = useState("");
   const productImages = Array.isArray(product?.images) && product.images.length > 0 ? product.images : [product?.image].filter(Boolean);
   const [activeImage, setActiveImage] = useState(productImages[0]);
+  const sizeOptions = ["S", "M", "L", "XL"];
+  const colorOptions = [
+    { name: "Blue", hex: "#2F6FED" },
+    { name: "White", hex: "#FFFFFF" }
+  ];
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [variantError, setVariantError] = useState("");
   if (!product) {
     return <div style={{ backgroundColor: "#F8FAFC", minHeight: "calc(100vh - 64px)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
@@ -30,13 +38,24 @@ function ProductDetailPage() {
   }
   const relatedProducts = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
   const handleAddToCart = () => {
+    if (!selectedSize) {
+      setVariantError("Please select size");
+      return;
+    }
+    if (!selectedColor) {
+      setVariantError("Please select color");
+      return;
+    }
+    setVariantError("");
     addToCart(
       {
         id: product.id,
         name: product.name,
         code: product.code,
         category: product.category,
-        image: product.image
+        image: product.image,
+        size: selectedSize,
+        color: selectedColor
       },
       quantity
     );
@@ -83,7 +102,7 @@ Product Link: ${window.location.href}`;
         {
     /* Product Details */
   }
-        <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 mb-16">
+        <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 mb-24">
           {
     /* Product Image */
   }
@@ -122,7 +141,7 @@ Product Link: ${window.location.href}`;
     transition={{ duration: 0.5 }}
   >
             <div className="bg-white rounded-2xl p-8" style={{ border: "1px solid #E2E8F0", boxShadow: "0 8px 20px rgba(15, 23, 42, 0.08)" }}>
-              <h1 className="mb-3" style={{ color: "#0A2540" }}>{product.name}</h1>
+              <h1 className="text-3xl md:text-4xl mb-3" style={{ color: "#0A2540" }}>{product.name}</h1>
               <p className="text-sm mb-3" style={{ color: "#9CA3AF" }}>Product Code: {product.code}</p>
               <p className="inline-block px-3 py-1 rounded-lg text-sm mb-6 capitalize" style={{ backgroundColor: "#E6F7FB", color: "#00B8D9" }}>
                 {product.category.replace("-", " ")}
@@ -131,6 +150,58 @@ Product Link: ${window.location.href}`;
               <div className="mb-8">
                 <h3 className="mb-3" style={{ color: "#0A2540" }}>Description</h3>
                 <p style={{ color: "#1F2937", lineHeight: "1.7" }}>{product.description}</p>
+              </div>
+
+              <div className="mb-6" style={{ borderTop: "1px solid #E5E7EB" }} />
+
+              <div className="mb-6">
+                <h3 className="mb-3" style={{ color: "#0A2540" }}>Size</h3>
+                <div className="flex flex-wrap gap-2">
+                  {sizeOptions.map((size) => <button
+    key={size}
+    onClick={() => {
+      setSelectedSize(size);
+      setVariantError("");
+    }}
+    className="px-4 py-2 rounded-lg text-sm transition-colors"
+    style={{
+      backgroundColor: selectedSize === size ? "#EAF2FF" : "#F8FAFC",
+      color: selectedSize === size ? "#2F6FED" : "#1F2937",
+      border: selectedSize === size ? "1px solid #2F6FED" : "1px solid #E2E8F0",
+      fontWeight: selectedSize === size ? 600 : 500
+    }}
+  >
+                    {size}
+                  </button>)}
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="mb-3" style={{ color: "#0A2540" }}>Color</h3>
+                <div className="flex items-center gap-3">
+                  {colorOptions.map((color) => <button
+    key={color.name}
+    onClick={() => {
+      setSelectedColor(color.name);
+      setVariantError("");
+    }}
+    className="w-9 h-9 rounded-full p-0.5 transition-all"
+    style={{
+      border: selectedColor === color.name ? "2px solid #2F6FED" : "2px solid #E2E8F0",
+      boxShadow: selectedColor === color.name ? "0 0 0 2px #EAF2FF" : "none"
+    }}
+    title={color.name}
+    aria-label={color.name}
+  >
+                    <span
+      className="block w-full h-full rounded-full"
+      style={{
+        backgroundColor: color.hex,
+        border: color.name === "White" ? "1px solid #D1D5DB" : "none"
+      }}
+    />
+                  </button>)}
+                </div>
               </div>
 
               {
@@ -160,6 +231,7 @@ Product Link: ${window.location.href}`;
               {
     /* Add to Cart Button */
   }
+              {variantError && <p className="text-sm mb-3" style={{ color: "#DC2626" }}>{variantError}</p>}
               <button
     onClick={handleAddToCart}
     className="w-full py-4 rounded-xl flex items-center justify-center gap-3 mb-6 transition-all hover:opacity-90"

@@ -68,15 +68,15 @@ function Footer() {
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5" style={{ color: "#00B8D9" }} />
-                <span className="text-sm" style={{ color: "#6B7280" }}>info@medsupplypro.sa</span>
+                <span className="text-sm" style={{ color: "#6B7280" }}>info@aspksa.com</span>
               </div>
               <div className="flex items-start gap-2">
                 <Phone className="w-4 h-4 mt-0.5" style={{ color: "#00B8D9" }} />
-                <span className="text-sm" style={{ color: "#6B7280" }}>+966 11 234 5678</span>
+                <span className="text-sm" style={{ color: "#6B7280" }}>+966-13-814 1130</span>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5" style={{ color: "#00B8D9" }} />
-                <span className="text-sm" style={{ color: "#6B7280" }}>Riyadh, Saudi Arabia</span>
+                <span className="text-sm" style={{ color: "#6B7280" }}>Dammam, Saudi Arabia</span>
               </div>
             </div>
           </div>
