@@ -5,37 +5,46 @@ import { CategoryCard } from "../components/CategoryCard";
 import { ProductCard } from "../components/ProductCard";
 import { categories } from "../data/products";
 import { products } from "../data/products";
+import heroImage from "../../assets/hero.jpeg";
 function HomePage() {
   const featuredProducts = products.filter((p) => p.featured).slice(0, 8);
   return <div style={{ backgroundColor: "#F8FAFC" }}>
       {
     /* Hero Section */
   }
-      <section
-    className="relative overflow-hidden"
-    style={{
-      background: "linear-gradient(135deg, #0F4DFF 0%, #00C9F5 100%)"
-    }}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #F8FCFF 0%, #EFF6FF 100%)" }} />
+        <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full opacity-30 blur-3xl" style={{ backgroundColor: "#93C5FD" }} />
+        <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full opacity-35 blur-3xl" style={{ backgroundColor: "#67E8F9" }} />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+              <motion.span
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.45 }}
+    className="inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium mb-5"
+    style={{ backgroundColor: "#DBEAFE", color: "#1D4ED8" }}
   >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="max-w-3xl">
+                Trusted Medical Supplies in Saudi Arabia
+              </motion.span>
             <motion.h1
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6 }}
-    className="text-4xl md:text-5xl lg:text-6xl mb-8"
-    style={{ color: "white" }}
+    className="text-4xl md:text-5xl lg:text-[56px] leading-tight mb-6"
+    style={{ color: "#0A2540" }}
   >
-              One Stop Source for Healthcare Essentials
+                One Stop Source for Healthcare Essentials
             </motion.h1>
             <motion.p
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, delay: 0.1 }}
-    className="text-lg md:text-xl mb-10"
-    style={{ color: "rgba(255, 255, 255, 0.9)" }}
+    className="text-lg md:text-xl mb-8 max-w-2xl"
+    style={{ color: "#475569" }}
   >
-              Premium medical supplies and equipment for healthcare professionals across Saudi Arabia. Quality products, reliable service, and competitive pricing.
+                Premium medical supplies and equipment for healthcare professionals across Saudi Arabia. Quality products, reliable service, and competitive pricing.
             </motion.p>
             <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -46,18 +55,53 @@ function HomePage() {
               <Link
     to="/products"
     className="px-8 py-4 rounded-2xl flex items-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-lg"
-    style={{ backgroundColor: "white", color: "#1E5EFF" }}
+    style={{ backgroundColor: "#1E5EFF", color: "white" }}
   >
                 <span>View Products</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
     to="/contact"
-    className="px-8 py-4 rounded-2xl flex items-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-lg"
-    style={{ backgroundColor: "#00B8D9", color: "white" }}
+    className="px-8 py-4 rounded-2xl flex items-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-lg border"
+    style={{ borderColor: "#BFDBFE", backgroundColor: "#EFF6FF", color: "#1E5EFF" }}
   >
                 <span>Contact Us</span>
               </Link>
+            </motion.div>
+
+              <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.3 }}
+    className="mt-8 flex flex-wrap gap-6"
+  >
+                <div>
+                  <p className="text-2xl font-semibold" style={{ color: "#0A2540" }}>2000+</p>
+                  <p className="text-sm" style={{ color: "#64748B" }}>Medical Products</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold" style={{ color: "#0A2540" }}>500+</p>
+                  <p className="text-sm" style={{ color: "#64748B" }}>Healthcare Clients</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold" style={{ color: "#0A2540" }}>24/7</p>
+                  <p className="text-sm" style={{ color: "#64748B" }}>Support Team</p>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.div
+    initial={{ opacity: 0, x: 24 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.65, delay: 0.15 }}
+    className="relative"
+  >
+              <div className="absolute -inset-3 rounded-[28px]" style={{ background: "linear-gradient(135deg, rgba(30,94,255,0.15), rgba(0,184,217,0.1))" }} />
+              <img
+    src={heroImage}
+    alt="Medical supplies and equipment"
+    className="relative w-full h-[280px] sm:h-[360px] lg:h-[430px] rounded-3xl object-cover shadow-xl"
+  />
             </motion.div>
           </div>
         </div>

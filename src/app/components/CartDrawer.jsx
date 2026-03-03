@@ -1,24 +1,54 @@
-import { X, Plus, Minus, Trash2 } from "lucide-react";
+import { X, Plus, Minus, Trash2, Phone, Check } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useCart } from "../context/CartContext";
 import { useState } from "react";
+
+const salesTeam = [{
+  id: "ahmed",
+  name: "Ahmed",
+  specialty: "B2B Sales",
+  phone: "+966xxxx"
+}, {
+  id: "khalid",
+  name: "Khalid",
+  specialty: "Medical Supplies",
+  phone: "+966xxxx"
+}, {
+  id: "faisal",
+  name: "Faisal",
+  specialty: "Key Accounts",
+  phone: "+966xxxx"
+}];
+
 function OrderFormModal({ isOpen, onClose, onSubmit }) {
   const [formData, setFormData] = useState({
     customerName: "",
     companyName: "",
     email: "",
     phone: "",
-    notes: ""
+    notes: "",
+    selectedSalesman: ""
   });
+  const inputClassName = "w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 transition-colors";
+  const inputStyle = {
+    backgroundColor: "#F8FAFC",
+    border: "1px solid #E2E8F0",
+    color: "#1F2937"
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    const selectedSalesman = salesTeam.find((salesman) => salesman.id === formData.selectedSalesman);
+    onSubmit({
+      ...formData,
+      selectedSalesman
+    });
     setFormData({
       customerName: "",
       companyName: "",
       email: "",
       phone: "",
-      notes: ""
+      notes: "",
+      selectedSalesman: ""
     });
   };
   return <AnimatePresence>
@@ -41,124 +71,150 @@ function OrderFormModal({ isOpen, onClose, onSubmit }) {
     initial={{ opacity: 0, scale: 0.95, y: 20 }}
     animate={{ opacity: 1, scale: 1, y: 0 }}
     exit={{ opacity: 0, scale: 0.95, y: 20 }}
-    className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-50"
+    className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl z-50 max-h-[92vh]"
   >
-            <div className="bg-white rounded-2xl p-8 mx-4" style={{ boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)" }}>
-              <div className="flex justify-between items-center mb-6">
-                <h2 style={{ color: "#0A2540" }}>Submit Order Inquiry</h2>
-                <button onClick={onClose} className="hover:opacity-70">
-                  <X className="w-5 h-5" style={{ color: "#6B7280" }} />
-                </button>
+            <div className="bg-white rounded-3xl mx-4 overflow-hidden" style={{ boxShadow: "0 24px 48px rgba(2, 12, 27, 0.2)" }}>
+              <div className="px-6 md:px-8 py-5 border-b" style={{ borderColor: "#E2E8F0", background: "linear-gradient(180deg, #F8FBFF 0%, #FFFFFF 100%)" }}>
+                <div className="flex justify-between items-start gap-4">
+                  <div>
+                    <h2 style={{ color: "#0A2540" }}>Submit Order Inquiry</h2>
+                    <p className="text-sm mt-1" style={{ color: "#64748B" }}>Choose a salesman and share your order details.</p>
+                  </div>
+                  <button onClick={onClose} className="hover:opacity-70 mt-1">
+                    <X className="w-5 h-5" style={{ color: "#6B7280" }} />
+                  </button>
+                </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
-                    Customer Name *
-                  </label>
-                  <input
+              <div className="px-6 md:px-8 py-6 overflow-y-auto max-h-[calc(92vh-86px)]">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="p-4 rounded-2xl" style={{ backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0" }}>
+                    <label className="block text-sm mb-3" style={{ color: "#1F2937" }}>
+                      Choose Salesman *
+                    </label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      {salesTeam.map((salesman) => <button
+    key={salesman.id}
+    type="button"
+    onClick={() => setFormData({ ...formData, selectedSalesman: salesman.id })}
+    className="text-left p-4 rounded-xl transition-all hover:-translate-y-0.5"
+    style={{
+      border: `1px solid ${formData.selectedSalesman === salesman.id ? "#1E5EFF" : "#DCE4EF"}`,
+      backgroundColor: formData.selectedSalesman === salesman.id ? "#EFF6FF" : "white",
+      boxShadow: formData.selectedSalesman === salesman.id ? "0 6px 14px rgba(30, 94, 255, 0.15)" : "0 2px 8px rgba(15, 23, 42, 0.05)"
+    }}
+  >
+                          <div className="flex items-center justify-between gap-3 mb-2">
+                            <p style={{ color: "#0A2540" }}>{salesman.name}</p>
+                            <span className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: formData.selectedSalesman === salesman.id ? "#1E5EFF" : "#E2E8F0" }}>
+                              <Check className="w-3.5 h-3.5" style={{ color: "white" }} />
+                            </span>
+                          </div>
+                          <p className="text-sm" style={{ color: "#475569" }}>{salesman.specialty}</p>
+                          <p className="text-sm mt-2 flex items-center gap-1.5" style={{ color: "#1E5EFF" }}>
+                            <Phone className="w-3.5 h-3.5" />
+                            {salesman.phone}
+                          </p>
+                        </button>)}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
+                        Customer Name *
+                      </label>
+                      <input
     type="text"
     required
     value={formData.customerName}
     onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
-    className="w-full px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2"
-    style={{
-      backgroundColor: "#F8FAFC",
-      border: "1px solid #E2E8F0",
-      color: "#1F2937"
-    }}
+    className={inputClassName}
+    style={inputStyle}
     onFocus={(e) => e.currentTarget.style.borderColor = "#1E5EFF"}
     onBlur={(e) => e.currentTarget.style.borderColor = "#E2E8F0"}
   />
-                </div>
+                    </div>
 
-                <div>
-                  <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
-                    Company Name *
-                  </label>
-                  <input
+                    <div>
+                      <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
+                        Company Name *
+                      </label>
+                      <input
     type="text"
     required
     value={formData.companyName}
     onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-    className="w-full px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2"
-    style={{
-      backgroundColor: "#F8FAFC",
-      border: "1px solid #E2E8F0",
-      color: "#1F2937"
-    }}
+    className={inputClassName}
+    style={inputStyle}
     onFocus={(e) => e.currentTarget.style.borderColor = "#1E5EFF"}
     onBlur={(e) => e.currentTarget.style.borderColor = "#E2E8F0"}
   />
-                </div>
+                    </div>
 
-                <div>
-                  <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
-                    Email *
-                  </label>
-                  <input
+                    <div>
+                      <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
+                        Email *
+                      </label>
+                      <input
     type="email"
     required
     value={formData.email}
     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-    className="w-full px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2"
-    style={{
-      backgroundColor: "#F8FAFC",
-      border: "1px solid #E2E8F0",
-      color: "#1F2937"
-    }}
+    className={inputClassName}
+    style={inputStyle}
     onFocus={(e) => e.currentTarget.style.borderColor = "#1E5EFF"}
     onBlur={(e) => e.currentTarget.style.borderColor = "#E2E8F0"}
   />
-                </div>
+                    </div>
 
-                <div>
-                  <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
-                    Phone *
-                  </label>
-                  <input
+                    <div>
+                      <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
+                        Phone *
+                      </label>
+                      <input
     type="tel"
     required
     value={formData.phone}
     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-    className="w-full px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2"
-    style={{
-      backgroundColor: "#F8FAFC",
-      border: "1px solid #E2E8F0",
-      color: "#1F2937"
-    }}
+    className={inputClassName}
+    style={inputStyle}
     onFocus={(e) => e.currentTarget.style.borderColor = "#1E5EFF"}
     onBlur={(e) => e.currentTarget.style.borderColor = "#E2E8F0"}
   />
-                </div>
+                    </div>
+                  </div>
 
-                <div>
-                  <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
-                    Notes (Optional)
-                  </label>
-                  <textarea
+                  <div>
+                    <label className="block text-sm mb-1.5" style={{ color: "#1F2937" }}>
+                      Notes (Optional)
+                    </label>
+                    <textarea
     value={formData.notes}
     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-    rows={3}
-    className="w-full px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 resize-none"
-    style={{
-      backgroundColor: "#F8FAFC",
-      border: "1px solid #E2E8F0",
-      color: "#1F2937"
-    }}
+    rows={4}
+    className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 resize-none transition-colors"
+    style={inputStyle}
     onFocus={(e) => e.currentTarget.style.borderColor = "#1E5EFF"}
     onBlur={(e) => e.currentTarget.style.borderColor = "#E2E8F0"}
   />
-                </div>
+                  </div>
 
-                <button
+                  <button
     type="submit"
-    className="w-full py-3 rounded-xl transition-all hover:opacity-90"
-    style={{ backgroundColor: "#1E5EFF", color: "white" }}
+    disabled={!formData.selectedSalesman}
+    className="w-full py-3.5 rounded-xl transition-all"
+    style={{
+      backgroundColor: formData.selectedSalesman ? "#1E5EFF" : "#93C5FD",
+      color: "white",
+      cursor: formData.selectedSalesman ? "pointer" : "not-allowed",
+      boxShadow: formData.selectedSalesman ? "0 8px 20px rgba(30, 94, 255, 0.3)" : "none"
+    }}
   >
-                  Submit Order Inquiry
-                </button>
-              </form>
+                    Submit Order Inquiry
+                  </button>
+                </form>
+              </div>
             </div>
           </motion.div>
         </>}
