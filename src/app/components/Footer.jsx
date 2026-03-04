@@ -1,7 +1,11 @@
 import { Link } from "react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import aspLogo from "../../assets/asp.png";
+
 function Footer() {
+  const { t } = useTranslation();
+
   return <footer className="bg-white border-t mt-16" style={{ borderColor: "#E2E8F0" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -13,7 +17,7 @@ function Footer() {
               <img src={aspLogo} alt="ASP logo" className="h-10 w-auto object-contain" />
             </div>
             <p className="text-sm" style={{ color: "#6B7280" }}>
-              Your trusted partner for healthcare essentials and medical supplies across Saudi Arabia.
+              {t("footer.tagline")}
             </p>
           </div>
 
@@ -21,19 +25,19 @@ function Footer() {
     /* Quick Links */
   }
           <div>
-            <h4 className="mb-4" style={{ color: "#0A2540" }}>Quick Links</h4>
+            <h4 className="mb-4" style={{ color: "#0A2540" }}>{t("footer.quickLinks")}</h4>
             <div className="flex flex-col gap-2">
               <Link to="/" className="text-sm transition-colors" style={{ color: "#6B7280" }} onMouseEnter={(e) => e.currentTarget.style.color = "#1E5EFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#6B7280"}>
-                Home
+                {t("nav.home")}
               </Link>
               <Link to="/products" className="text-sm transition-colors" style={{ color: "#6B7280" }} onMouseEnter={(e) => e.currentTarget.style.color = "#1E5EFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#6B7280"}>
-                Products
+                {t("nav.products")}
               </Link>
               <Link to="/about" className="text-sm transition-colors" style={{ color: "#6B7280" }} onMouseEnter={(e) => e.currentTarget.style.color = "#1E5EFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#6B7280"}>
-                About Us
+                {t("footer.aboutUs")}
               </Link>
               <Link to="/contact" className="text-sm transition-colors" style={{ color: "#6B7280" }} onMouseEnter={(e) => e.currentTarget.style.color = "#1E5EFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#6B7280"}>
-                Contact
+                {t("nav.contact")}
               </Link>
             </div>
           </div>
@@ -42,19 +46,19 @@ function Footer() {
     /* Categories */
   }
           <div>
-            <h4 className="mb-4" style={{ color: "#0A2540" }}>Categories</h4>
+            <h4 className="mb-4" style={{ color: "#0A2540" }}>{t("common.categories")}</h4>
             <div className="flex flex-col gap-2">
               <Link to="/products?category=surgical" className="text-sm transition-colors" style={{ color: "#6B7280" }} onMouseEnter={(e) => e.currentTarget.style.color = "#1E5EFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#6B7280"}>
-                Surgical Instruments
+                {t("categories.surgical")}
               </Link>
               <Link to="/products?category=diagnostic" className="text-sm transition-colors" style={{ color: "#6B7280" }} onMouseEnter={(e) => e.currentTarget.style.color = "#1E5EFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#6B7280"}>
-                Diagnostic Equipment
+                {t("categories.diagnostic")}
               </Link>
               <Link to="/products?category=ppe" className="text-sm transition-colors" style={{ color: "#6B7280" }} onMouseEnter={(e) => e.currentTarget.style.color = "#1E5EFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#6B7280"}>
-                PPE
+                {t("categories.ppe")}
               </Link>
               <Link to="/products?category=lab" className="text-sm transition-colors" style={{ color: "#6B7280" }} onMouseEnter={(e) => e.currentTarget.style.color = "#1E5EFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#6B7280"}>
-                Laboratory Supplies
+                {t("categories.lab")}
               </Link>
             </div>
           </div>
@@ -63,7 +67,7 @@ function Footer() {
     /* Contact Info */
   }
           <div>
-            <h4 className="mb-4" style={{ color: "#0A2540" }}>Contact Us</h4>
+            <h4 className="mb-4" style={{ color: "#0A2540" }}>{t("common.contactUs")}</h4>
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5" style={{ color: "#00B8D9" }} />
@@ -75,7 +79,7 @@ function Footer() {
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5" style={{ color: "#00B8D9" }} />
-                <span className="text-sm" style={{ color: "#6B7280" }}>Dammam, Saudi Arabia</span>
+                <span className="text-sm" style={{ color: "#6B7280" }}>{t("footer.location")}</span>
               </div>
             </div>
           </div>
@@ -86,7 +90,7 @@ function Footer() {
   }
         <div className="border-t mt-8 pt-8" style={{ borderColor: "#E2E8F0" }}>
           <p className="text-sm text-center" style={{ color: "#6B7280" }}>
-            © 2026 ASP. All rights reserved.
+            {t("footer.copyright")}
           </p>
         </div>
       </div>

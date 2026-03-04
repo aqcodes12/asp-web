@@ -3,16 +3,22 @@ import { Link } from "react-router";
 import { ShoppingCart, Share2, Plus, Minus } from "lucide-react";
 import { motion } from "motion/react";
 import { useCart } from "../context/CartContext";
+import { useTranslation } from "react-i18next";
+
 function ProductCard({ product }) {
+  const { t } = useTranslation();
   const [quantity, setQuantity] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
   const { addToCart } = useCart();
+  const productName = t(product.nameKey);
+  const categoryLabel = t(`categories.${product.category}`);
+
   const handleAddToCart = (e) => {
     e.preventDefault();
     addToCart(
       {
         id: product.id,
-        name: product.name,
+        nameKey: product.nameKey,
         code: product.code,
         category: product.category,
         image: product.image
@@ -25,8 +31,8 @@ function ProductCard({ product }) {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: product.name,
-          text: `Check out ${product.name} - ${product.code}`,
+          title: productName,
+          text: t("productCard.shareText", { productName, code: product.code }),
           url: window.location.origin + `/products/${product.id}`
         });
       } catch (err) {
@@ -52,7 +58,7 @@ function ProductCard({ product }) {
         <div className="relative aspect-[4/3] overflow-hidden" style={{ backgroundColor: "#F8FAFC" }}>
           <img
     src={product.image}
-    alt={product.name}
+    alt={productName}
     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
   />
           <button
@@ -67,16 +73,16 @@ function ProductCard({ product }) {
     /* Product Info */
   }
         <div className="p-5 flex-1 flex flex-col">
-          <h3 className="mb-1" style={{ color: "#0A2540" }}>{product.name}</h3>
-          <p className="text-sm mb-2" style={{ color: "#6B7280" }}>Code: {product.code}</p>
-          <p className="text-xs mb-4 capitalize" style={{ color: "#00B8D9" }}>{product.category.replace("-", " ")}</p>
+          <h3 className="mb-1" style={{ color: "#0A2540" }}>{productName}</h3>
+          <p className="text-sm mb-2" style={{ color: "#6B7280" }}>{t("productCard.code", { code: product.code })}</p>
+          <p className="text-xs mb-4 capitalize" style={{ color: "#00B8D9" }}>{categoryLabel}</p>
 
           <div className="mt-auto">
             {
     /* Quantity Selector */
   }
             <div className="flex items-center gap-3 mb-3">
-              <span className="text-sm" style={{ color: "#6B7280" }}>Qty:</span>
+              <span className="text-sm" style={{ color: "#6B7280" }}>{t("common.qty")}</span>
               <div className="flex items-center gap-2">
                 <button
     onClick={(e) => {
@@ -111,7 +117,7 @@ function ProductCard({ product }) {
     style={{ backgroundColor: "#1E5EFF", color: "white" }}
   >
               <ShoppingCart className="w-4 h-4" />
-              <span>Add to Cart</span>
+              <span>{t("common.addToCart")}</span>
             </button>
           </div>
         </div>

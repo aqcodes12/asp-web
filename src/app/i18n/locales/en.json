@@ -1,0 +1,351 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "contact": "Contact",
+    "toggleLanguage": "Switch language"
+  },
+  "common": {
+    "categories": "Categories",
+    "contactUs": "Contact Us",
+    "addToCart": "Add to Cart",
+    "qty": "Qty:",
+    "backToProducts": "Back to Products",
+    "description": "Description",
+    "size": "Size",
+    "color": "Color",
+    "quantity": "Quantity",
+    "close": "Close",
+    "colors": {
+      "blue": "Blue",
+      "white": "White"
+    }
+  },
+  "footer": {
+    "tagline": "Your trusted partner for healthcare essentials and medical supplies across Saudi Arabia.",
+    "quickLinks": "Quick Links",
+    "aboutUs": "About Us",
+    "location": "Dammam, Saudi Arabia",
+    "copyright": "© 2026 ASP. All rights reserved."
+  },
+  "home": {
+    "hero": {
+      "badge": "Trusted Medical Supplies in Saudi Arabia",
+      "title": "One Stop Source for Healthcare Essentials",
+      "description": "Premium medical supplies and equipment for healthcare professionals across Saudi Arabia. Quality products, reliable service, and competitive pricing.",
+      "viewProducts": "View Products",
+      "contactUs": "Contact Us",
+      "imageAlt": "Medical supplies and equipment"
+    },
+    "stats": {
+      "medicalProducts": "Medical Products",
+      "healthcareClients": "Healthcare Clients",
+      "supportTeam": "Support Team"
+    },
+    "categories": {
+      "title": "Browse by Category",
+      "subtitle": "Find exactly what you need from our comprehensive range"
+    },
+    "featured": {
+      "title": "Featured Products",
+      "subtitle": "Our most popular medical supplies and equipment",
+      "viewAll": "View All Products"
+    },
+    "aboutPreview": {
+      "title": "Your Trusted Medical Supply Partner",
+      "description": "ASP has been serving healthcare facilities across Saudi Arabia for over 15 years. We specialize in providing high-quality medical equipment, surgical instruments, and healthcare supplies to hospitals, clinics, and medical professionals.",
+      "quality": {
+        "title": "Quality Guaranteed",
+        "description": "All products meet international medical standards"
+      },
+      "delivery": {
+        "title": "Fast Delivery",
+        "description": "Quick and reliable delivery across Saudi Arabia"
+      },
+      "support": {
+        "title": "Expert Support",
+        "description": "Dedicated team to assist with your medical supply needs"
+      },
+      "learnMore": "Learn More",
+      "cards": {
+        "clients": "Healthcare Clients",
+        "products": "Products Available",
+        "support": "Customer Support"
+      }
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "description": "Contact our team today to discuss your medical supply needs. We're here to help you find the right products for your healthcare facility.",
+      "button": "Get in Touch"
+    }
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Browse our comprehensive range of medical supplies",
+    "searchPlaceholder": "Search by product name, code, or category...",
+    "allProducts": "All Products",
+    "sortBy": "Sort By",
+    "sortName": "Name (A-Z)",
+    "sortCode": "Product Code",
+    "filtersAndSort": "Filters & Sort",
+    "noResults": "No products found matching your criteria.",
+    "resultsCount_one": "Showing {{count}} product",
+    "resultsCount_other": "Showing {{count}} products",
+    "1": {
+      "name": "Digital Stethoscope",
+      "description": "High-precision digital stethoscope with Bluetooth connectivity for real-time diagnostics. Features advanced noise cancellation and recording capabilities."
+    },
+    "2": {
+      "name": "Surgical Scissors Set",
+      "description": "Premium stainless steel surgical scissors set including Mayo, Metzenbaum, and iris scissors. Autoclavable and corrosion-resistant."
+    },
+    "3": {
+      "name": "N95 Respirator Masks",
+      "description": "NIOSH-approved N95 respirator masks. Box of 100 units. High filtration efficiency and comfortable fit for extended wear."
+    },
+    "4": {
+      "name": "Blood Pressure Monitor",
+      "description": "Automatic digital blood pressure monitor with large LCD display. Includes memory storage for 120 readings and irregular heartbeat detection."
+    },
+    "5": {
+      "name": "Disposable Gloves (Latex)",
+      "description": "Powder-free latex examination gloves. Box of 500 units. Ambidextrous design with textured fingertips for enhanced grip."
+    },
+    "6": {
+      "name": "Infrared Thermometer",
+      "description": "Non-contact infrared thermometer with instant reading. Measures body, surface, and room temperature with high accuracy."
+    },
+    "7": {
+      "name": "Wheelchair - Standard",
+      "description": "Standard manual wheelchair with padded armrests and footrests. Foldable design for easy transport and storage."
+    },
+    "8": {
+      "name": "Pulse Oximeter",
+      "description": "Fingertip pulse oximeter with LED display showing SpO2 and pulse rate. Portable and battery-powered with auto-shutoff."
+    },
+    "9": {
+      "name": "Surgical Face Masks",
+      "description": "Type IIR surgical face masks with high bacterial filtration efficiency. Fluid-resistant and latex-free. Box of 50 units."
+    },
+    "10": {
+      "name": "Disposable Syringes",
+      "description": "3ml disposable syringes with needle. Sterile, single-use, and latex-free. Box of 100 units with clear barrel for easy measurement."
+    },
+    "11": {
+      "name": "ECG Machine - 12 Lead",
+      "description": "Professional 12-lead ECG machine with digital display and thermal printer. Includes interpretation software and data storage."
+    },
+    "12": {
+      "name": "IV Stand (Adjustable)",
+      "description": "Height-adjustable IV stand with 4-hook top. Chrome-plated steel with stable base and smooth-rolling casters."
+    },
+    "13": {
+      "name": "Laboratory Centrifuge",
+      "description": "High-speed laboratory centrifuge with digital controls. 12-tube capacity with safety lid lock and automatic imbalance detection."
+    },
+    "14": {
+      "name": "Microscope - Binocular",
+      "description": "Professional binocular microscope with LED illumination. 40x to 1000x magnification range with coaxial coarse/fine focus."
+    },
+    "15": {
+      "name": "Hospital Bed - Electric",
+      "description": "Electric hospital bed with adjustable height and backrest. Includes side rails and mattress. Remote control operation."
+    },
+    "16": {
+      "name": "Walking Frame (Zimmer)",
+      "description": "Lightweight aluminum walking frame with rubber ferrules. Height adjustable with ergonomic hand grips for maximum comfort."
+    },
+    "17": {
+      "name": "Autoclave Sterilizer",
+      "description": "23L capacity steam autoclave sterilizer with digital display. Automatic temperature and pressure control with multiple cycle options."
+    },
+    "18": {
+      "name": "Surgical Gowns (Disposable)",
+      "description": "Level 3 disposable isolation gowns. Fluid-resistant with elastic cuffs and tie closures. Box of 50 units."
+    },
+    "19": {
+      "name": "Nebulizer Machine",
+      "description": "Compressor nebulizer for respiratory therapy. Quiet operation with adjustable flow rate and complete mask set included."
+    },
+    "20": {
+      "name": "Blood Collection Tubes",
+      "description": "EDTA vacuum blood collection tubes. Sterile and latex-free. Box of 100 tubes with purple cap for hematology testing."
+    }
+  },
+  "categories": {
+    "surgical": "Surgical Instruments",
+    "diagnostic": "Diagnostic Equipment",
+    "ppe": "Personal Protective Equipment",
+    "lab": "Laboratory Supplies",
+    "disposable": "Disposable Medical Supplies",
+    "rehabilitation": "Rehabilitation Equipment"
+  },
+  "productCard": {
+    "shareText": "Check out {{productName}} - {{code}}",
+    "code": "Code: {{code}}"
+  },
+  "productDetail": {
+    "notFound": "Product Not Found",
+    "productCode": "Product Code: {{code}}",
+    "selectSize": "Please select size",
+    "selectColor": "Please select color",
+    "shareProduct": "Share Product",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "shareWhatsappText": "Check out {{productName}} ({{code}}) at {{url}}",
+    "shareEmailSubject": "Product Inquiry: {{productName}}",
+    "shareEmailBody": "I'm interested in {{productName}} ({{code}}).\n\nProduct Link: {{url}}",
+    "linkCopied": "Link copied!",
+    "copyFailed": "Failed to copy",
+    "relatedProducts": "Related Products",
+    "imageAlt": "{{productName}} view {{index}}"
+  },
+  "about": {
+    "hero": {
+      "title": "About ASP",
+      "description": "Your trusted partner in medical supplies, serving healthcare professionals across Saudi Arabia for over 15 years."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "paragraph1": "At ASP, we are committed to providing healthcare facilities with the highest quality medical supplies and equipment. Our mission is to support healthcare professionals by ensuring they have access to reliable, certified products when they need them most.",
+      "paragraph2": "We understand the critical nature of medical supplies in saving lives and improving patient care. That's why we maintain rigorous quality standards and work only with certified manufacturers and suppliers.",
+      "cards": {
+        "certified": {
+          "title": "Certified",
+          "description": "ISO certified quality standards"
+        },
+        "expertTeam": {
+          "title": "Expert Team",
+          "description": "Experienced medical supply professionals"
+        },
+        "growingNetwork": {
+          "title": "Growing Network",
+          "description": "Serving 500+ healthcare facilities across Saudi Arabia"
+        }
+      }
+    },
+    "values": {
+      "title": "Our Core Values",
+      "subtitle": "The principles that guide everything we do",
+      "items": {
+        "qualityFirst": {
+          "title": "Quality First",
+          "description": "We never compromise on quality. Every product meets or exceeds international medical standards."
+        },
+        "customerFocus": {
+          "title": "Customer Focus",
+          "description": "Your needs are our priority. We provide personalized service and support to every client."
+        },
+        "reliability": {
+          "title": "Reliability",
+          "description": "Count on us for consistent quality, timely delivery, and dependable service every time."
+        }
+      }
+    },
+    "stats": {
+      "yearsInBusiness": "Years in Business",
+      "healthcareClients": "Healthcare Clients",
+      "productsAvailable": "Products Available",
+      "clientSatisfaction": "Client Satisfaction"
+    },
+    "whyChoose": {
+      "title": "Why Choose ASP?",
+      "items": {
+        "1": {
+          "title": "Comprehensive Product Range",
+          "description": "From surgical instruments to diagnostic equipment, we offer a complete range of medical supplies."
+        },
+        "2": {
+          "title": "Certified Quality",
+          "description": "All products meet international standards and come with proper certifications."
+        },
+        "3": {
+          "title": "Fast & Reliable Delivery",
+          "description": "Efficient logistics ensuring your supplies arrive when you need them."
+        },
+        "4": {
+          "title": "Competitive Pricing",
+          "description": "Quality products at fair prices with volume discounts for bulk orders."
+        },
+        "5": {
+          "title": "Expert Support",
+          "description": "Our knowledgeable team is always ready to help with product selection and technical queries."
+        },
+        "6": {
+          "title": "Flexible Payment Terms",
+          "description": "We offer flexible payment options for registered healthcare institutions."
+        }
+      }
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Get in Touch",
+      "description": "Have questions about our products or services? Our team is here to help you find the right medical supplies for your healthcare facility."
+    },
+    "info": {
+      "contactUs": "Contact us",
+      "visitUs": "Visit us",
+      "telephone": "Telephone",
+      "telefax": "TeleFax",
+      "email": "E-mail",
+      "address": "No. 2, Ultra Business Center, Saud Faisal Road, Khalidiyah, Dammam-32225, KSA."
+    },
+    "form": {
+      "title": "Send us a Message",
+      "fullName": "Full Name *",
+      "emailAddress": "Email Address *",
+      "phoneNumber": "Phone Number *",
+      "company": "Company/Organization *",
+      "subject": "Subject *",
+      "message": "Message *",
+      "send": "Send Message",
+      "success": "Thank you for your inquiry! We will get back to you within 24 hours."
+    },
+    "map": {
+      "title": "Location Map",
+      "iframeTitle": "ASP location map"
+    },
+    "emergency": {
+      "title": "Need Urgent Medical Supplies?",
+      "description": "For urgent orders and emergency supply requests, please call our hotline"
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "remove": "Remove",
+    "orderSubmitted": "Order inquiry submitted successfully! We will contact you shortly.",
+    "itemsCount_one": "{{count}} item",
+    "itemsCount_other": "{{count}} items",
+    "sizeValue": "Size: {{value}}",
+    "colorValue": "Color: {{value}}",
+    "sales": {
+      "ahmed": {
+        "name": "Ahmed",
+        "specialty": "B2B Sales"
+      },
+      "khalid": {
+        "name": "Khalid",
+        "specialty": "Medical Supplies"
+      },
+      "faisal": {
+        "name": "Faisal",
+        "specialty": "Key Accounts"
+      }
+    },
+    "orderForm": {
+      "title": "Submit Order Inquiry",
+      "subtitle": "Choose a salesman and share your order details.",
+      "chooseSalesman": "Choose Salesman *",
+      "customerName": "Customer Name *",
+      "companyName": "Company Name *",
+      "email": "Email *",
+      "phone": "Phone *",
+      "notes": "Notes (Optional)",
+      "submit": "Submit Order Inquiry"
+    }
+  }
+}

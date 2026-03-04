@@ -1,10 +1,16 @@
 import { CheckCircle2, Award, Users, TrendingUp } from "lucide-react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
+
 function AboutPage() {
+  const { t } = useTranslation();
+
+  const whyChooseItems = [1, 2, 3, 4, 5, 6].map((index) => ({
+    title: t(`about.whyChoose.items.${index}.title`),
+    description: t(`about.whyChoose.items.${index}.description`)
+  }));
+
   return <div style={{ backgroundColor: "#F8FAFC" }}>
-      {
-    /* Hero Section */
-  }
       <section style={{ backgroundColor: "#E6F7FB" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <motion.div
@@ -13,17 +19,14 @@ function AboutPage() {
     transition={{ duration: 0.6 }}
     className="max-w-3xl mx-auto text-center"
   >
-            <h1 className="mb-6" style={{ color: "#0A2540" }}>About ASP</h1>
+            <h1 className="mb-6" style={{ color: "#0A2540" }}>{t("about.hero.title")}</h1>
             <p className="text-lg" style={{ color: "#1F2937" }}>
-              Your trusted partner in medical supplies, serving healthcare professionals across Saudi Arabia for over 15 years.
+              {t("about.hero.description")}
             </p>
           </motion.div>
         </div>
       </section>
 
-      {
-    /* Mission Section */
-  }
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -31,12 +34,12 @@ function AboutPage() {
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.6 }}
   >
-            <h2 className="mb-6" style={{ color: "#0A2540" }}>Our Mission</h2>
+            <h2 className="mb-6" style={{ color: "#0A2540" }}>{t("about.mission.title")}</h2>
             <p className="mb-4" style={{ color: "#1F2937" }}>
-              At ASP, we are committed to providing healthcare facilities with the highest quality medical supplies and equipment. Our mission is to support healthcare professionals by ensuring they have access to reliable, certified products when they need them most.
+              {t("about.mission.paragraph1")}
             </p>
             <p style={{ color: "#1F2937" }}>
-              We understand the critical nature of medical supplies in saving lives and improving patient care. That's why we maintain rigorous quality standards and work only with certified manufacturers and suppliers.
+              {t("about.mission.paragraph2")}
             </p>
           </motion.div>
 
@@ -48,88 +51,51 @@ function AboutPage() {
   >
             <div className="bg-white p-6 rounded-xl" style={{ border: "1px solid #E2E8F0" }}>
               <Award className="w-12 h-12 mb-4" style={{ color: "#1E5EFF" }} />
-              <h3 className="mb-2" style={{ color: "#0A2540" }}>Certified</h3>
-              <p className="text-sm" style={{ color: "#6B7280" }}>ISO certified quality standards</p>
+              <h3 className="mb-2" style={{ color: "#0A2540" }}>{t("about.mission.cards.certified.title")}</h3>
+              <p className="text-sm" style={{ color: "#6B7280" }}>{t("about.mission.cards.certified.description")}</p>
             </div>
             <div className="bg-white p-6 rounded-xl" style={{ border: "1px solid #E2E8F0" }}>
               <Users className="w-12 h-12 mb-4" style={{ color: "#00B8D9" }} />
-              <h3 className="mb-2" style={{ color: "#0A2540" }}>Expert Team</h3>
-              <p className="text-sm" style={{ color: "#6B7280" }}>Experienced medical supply professionals</p>
+              <h3 className="mb-2" style={{ color: "#0A2540" }}>{t("about.mission.cards.expertTeam.title")}</h3>
+              <p className="text-sm" style={{ color: "#6B7280" }}>{t("about.mission.cards.expertTeam.description")}</p>
             </div>
             <div className="bg-white p-6 rounded-xl col-span-2" style={{ border: "1px solid #E2E8F0" }}>
               <TrendingUp className="w-12 h-12 mb-4" style={{ color: "#1E5EFF" }} />
-              <h3 className="mb-2" style={{ color: "#0A2540" }}>Growing Network</h3>
-              <p className="text-sm" style={{ color: "#6B7280" }}>Serving 500+ healthcare facilities across Saudi Arabia</p>
+              <h3 className="mb-2" style={{ color: "#0A2540" }}>{t("about.mission.cards.growingNetwork.title")}</h3>
+              <p className="text-sm" style={{ color: "#6B7280" }}>{t("about.mission.cards.growingNetwork.description")}</p>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {
-    /* Values Section */
-  }
       <section style={{ backgroundColor: "white" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center mb-12">
-            <h2 className="mb-4" style={{ color: "#0A2540" }}>Our Core Values</h2>
-            <p style={{ color: "#6B7280" }}>The principles that guide everything we do</p>
+            <h2 className="mb-4" style={{ color: "#0A2540" }}>{t("about.values.title")}</h2>
+            <p style={{ color: "#6B7280" }}>{t("about.values.subtitle")}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <motion.div
+            {["qualityFirst", "customerFocus", "reliability"].map((key, index) => <motion.div
+    key={key}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: 0.1 }}
+    transition={{ duration: 0.6, delay: 0.1 * (index + 1) }}
   >
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#E6F7FB" }}>
-                  <CheckCircle2 className="w-8 h-8" style={{ color: "#1E5EFF" }} />
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#E6F7FB" }}>
+                    <CheckCircle2 className="w-8 h-8" style={{ color: index % 2 === 0 ? "#1E5EFF" : "#00B8D9" }} />
+                  </div>
+                  <h3 className="mb-3" style={{ color: "#0A2540" }}>{t(`about.values.items.${key}.title`)}</h3>
+                  <p style={{ color: "#6B7280" }}>
+                    {t(`about.values.items.${key}.description`)}
+                  </p>
                 </div>
-                <h3 className="mb-3" style={{ color: "#0A2540" }}>Quality First</h3>
-                <p style={{ color: "#6B7280" }}>
-                  We never compromise on quality. Every product meets or exceeds international medical standards.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: 0.2 }}
-  >
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#E6F7FB" }}>
-                  <CheckCircle2 className="w-8 h-8" style={{ color: "#00B8D9" }} />
-                </div>
-                <h3 className="mb-3" style={{ color: "#0A2540" }}>Customer Focus</h3>
-                <p style={{ color: "#6B7280" }}>
-                  Your needs are our priority. We provide personalized service and support to every client.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: 0.3 }}
-  >
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#E6F7FB" }}>
-                  <CheckCircle2 className="w-8 h-8" style={{ color: "#1E5EFF" }} />
-                </div>
-                <h3 className="mb-3" style={{ color: "#0A2540" }}>Reliability</h3>
-                <p style={{ color: "#6B7280" }}>
-                  Count on us for consistent quality, timely delivery, and dependable service every time.
-                </p>
-              </div>
-            </motion.div>
+              </motion.div>)}
           </div>
         </div>
       </section>
 
-      {
-    /* Stats Section */
-  }
       <section style={{ backgroundColor: "#E6F7FB" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -140,7 +106,7 @@ function AboutPage() {
     className="text-center"
   >
               <div className="text-4xl md:text-5xl mb-2" style={{ color: "#1E5EFF" }}>15+</div>
-              <p style={{ color: "#6B7280" }}>Years in Business</p>
+              <p style={{ color: "#6B7280" }}>{t("about.stats.yearsInBusiness")}</p>
             </motion.div>
 
             <motion.div
@@ -150,7 +116,7 @@ function AboutPage() {
     className="text-center"
   >
               <div className="text-4xl md:text-5xl mb-2" style={{ color: "#00B8D9" }}>500+</div>
-              <p style={{ color: "#6B7280" }}>Healthcare Clients</p>
+              <p style={{ color: "#6B7280" }}>{t("about.stats.healthcareClients")}</p>
             </motion.div>
 
             <motion.div
@@ -160,7 +126,7 @@ function AboutPage() {
     className="text-center"
   >
               <div className="text-4xl md:text-5xl mb-2" style={{ color: "#1E5EFF" }}>2000+</div>
-              <p style={{ color: "#6B7280" }}>Products Available</p>
+              <p style={{ color: "#6B7280" }}>{t("about.stats.productsAvailable")}</p>
             </motion.div>
 
             <motion.div
@@ -170,48 +136,20 @@ function AboutPage() {
     className="text-center"
   >
               <div className="text-4xl md:text-5xl mb-2" style={{ color: "#00B8D9" }}>99%</div>
-              <p style={{ color: "#6B7280" }}>Client Satisfaction</p>
+              <p style={{ color: "#6B7280" }}>{t("about.stats.clientSatisfaction")}</p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {
-    /* Why Choose Us */
-  }
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-12">
-          <h2 className="mb-4" style={{ color: "#0A2540" }}>Why Choose ASP?</h2>
+          <h2 className="mb-4" style={{ color: "#0A2540" }}>{t("about.whyChoose.title")}</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {[
-    {
-      title: "Comprehensive Product Range",
-      description: "From surgical instruments to diagnostic equipment, we offer a complete range of medical supplies."
-    },
-    {
-      title: "Certified Quality",
-      description: "All products meet international standards and come with proper certifications."
-    },
-    {
-      title: "Fast & Reliable Delivery",
-      description: "Efficient logistics ensuring your supplies arrive when you need them."
-    },
-    {
-      title: "Competitive Pricing",
-      description: "Quality products at fair prices with volume discounts for bulk orders."
-    },
-    {
-      title: "Expert Support",
-      description: "Our knowledgeable team is always ready to help with product selection and technical queries."
-    },
-    {
-      title: "Flexible Payment Terms",
-      description: "We offer flexible payment options for registered healthcare institutions."
-    }
-  ].map((item, index) => <motion.div
-    key={index}
+          {whyChooseItems.map((item, index) => <motion.div
+    key={item.title}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.4, delay: index * 0.1 }}
@@ -228,6 +166,7 @@ function AboutPage() {
       </section>
     </div>;
 }
+
 export {
   AboutPage
 };
