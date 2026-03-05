@@ -187,7 +187,13 @@
   },
   "productCard": {
     "shareText": "اطلع على {{productName}} - {{code}}",
-    "code": "الكود: {{code}}"
+    "code": "الكود: {{code}}",
+    "viewDetails": "عرض التفاصيل",
+    "badges": {
+      "new": "جديد",
+      "offer": "عرض",
+      "featured": "مميز"
+    }
   },
   "productDetail": {
     "notFound": "المنتج غير موجود",

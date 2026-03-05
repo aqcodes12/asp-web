@@ -29,17 +29,68 @@ const resolveImage = (imagePath) => {
   return [...segments, encodedFileName].join("/");
 };
 
-const products = rawProducts.map((product, index) => ({
-  id: String(product.id),
-  code: product.code,
-  name: product.name,
-  arabic: product.arabic,
-  category: toCategoryId(product.category || "other"),
-  categoryName: product.category || "Other",
-  description: product.description || "",
-  image: resolveImage(product.image),
-  featured: index < 8
-}));
+const normalizeBadge = (badgeValue, product, isFeatured) => {
+  if (typeof badgeValue === "string" && badgeValue.trim()) {
+    return badgeValue.trim().toUpperCase();
+  }
+
+  if ((product.code || "").includes("#2+1") || (product.name || "").includes("2+1")) {
+    return "OFFER";
+  }
+
+  if (isFeatured) {
+    return "FEATURED";
+  }
+
+  return "NEW";
+};
+
+const normalizeColors = (colors) => {
+  if (!Array.isArray(colors)) {
+    return [];
+  }
+
+  return colors
+    .map((color) => {
+      if (typeof color === "string") {
+        return { id: color.toLowerCase(), name: color, hex: "#FFFFFF" };
+      }
+
+      if (color && typeof color === "object" && color.id && color.name) {
+        return {
+          id: String(color.id),
+          name: String(color.name),
+          hex: color.hex || "#FFFFFF"
+        };
+      }
+
+      return null;
+    })
+    .filter(Boolean);
+};
+
+const products = rawProducts.map((product, index) => {
+  const isFeatured = product.featured ?? index < 8;
+  const sizes = Array.isArray(product.sizes) ? product.sizes : [];
+  const colors = normalizeColors(product.colors);
+
+  return {
+    id: String(product.id),
+    code: product.code,
+    name: product.name,
+    arabic: product.arabic,
+    category: toCategoryId(product.category || "other"),
+    categoryName: product.category || "Other",
+    description: product.description || "",
+    images: Array.isArray(product.images) ? product.images.map((imagePath) => resolveImage(imagePath)) : [],
+    image: resolveImage(product.image),
+    sizes,
+    colors,
+    hasVariants: sizes.length > 0 || colors.length > 0,
+    featured: isFeatured,
+    badge: normalizeBadge(product.badge, product, isFeatured)
+  };
+});
 
 const categories = Array.from(new Map(products.map((product) => [product.category, product.categoryName])).entries()).map(
   ([id, name], index) => ({

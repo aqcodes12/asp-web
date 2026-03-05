@@ -19,11 +19,10 @@ function ProductDetailPage() {
   const [variantError, setVariantError] = useState("");
   const isRTL = i18n.dir() === "rtl";
 
-  const sizeOptions = ["S", "M", "L", "XL"];
-  const colorOptions = [
-    { id: "blue", name: t("common.colors.blue"), hex: "#2F6FED" },
-    { id: "white", name: t("common.colors.white"), hex: "#FFFFFF" }
-  ];
+  const sizeOptions = Array.isArray(product?.sizes) ? product.sizes : [];
+  const colorOptions = Array.isArray(product?.colors) ? product.colors : [];
+  const requiresSize = sizeOptions.length > 0;
+  const requiresColor = colorOptions.length > 0;
 
   if (!product) {
     return <div style={{ backgroundColor: "#F8FAFC", minHeight: "calc(100vh - 64px)" }}>
@@ -56,12 +55,12 @@ function ProductDetailPage() {
   const relatedProducts = products.filter((item) => item.category === product.category && item.id !== product.id).slice(0, 4);
 
   const handleAddToCart = () => {
-    if (!selectedSize) {
+    if (requiresSize && !selectedSize) {
       setVariantError(t("productDetail.selectSize"));
       return;
     }
 
-    if (!selectedColor) {
+    if (requiresColor && !selectedColor) {
       setVariantError(t("productDetail.selectColor"));
       return;
     }
@@ -76,8 +75,8 @@ function ProductDetailPage() {
         code: product.code,
         category: product.category,
         image: product.image,
-        size: selectedSize,
-        color: selectedColor
+        size: selectedSize || undefined,
+        color: selectedColor || undefined
       },
       quantity
     );
@@ -174,7 +173,7 @@ function ProductDetailPage() {
 
               <div className="mb-6" style={{ borderTop: "1px solid #E5E7EB" }} />
 
-              <div className="mb-6">
+              {requiresSize && <div className="mb-6">
                 <h3 className="mb-3" style={{ color: "#0A2540" }}>{t("common.size")}</h3>
                 <div className="flex flex-wrap gap-2">
                   {sizeOptions.map((size) => <button
@@ -194,9 +193,9 @@ function ProductDetailPage() {
                     {size}
                   </button>)}
                 </div>
-              </div>
+              </div>}
 
-              <div className="mb-6">
+              {requiresColor && <div className="mb-6">
                 <h3 className="mb-3" style={{ color: "#0A2540" }}>{t("common.color")}</h3>
                 <div className="flex items-center gap-3">
                   {colorOptions.map((color) => <button
@@ -222,7 +221,7 @@ function ProductDetailPage() {
     />
                   </button>)}
                 </div>
-              </div>
+              </div>}
 
               <div className="mb-6">
                 <label className="block mb-3" style={{ color: "#0A2540" }}>{t("common.quantity")}</label>

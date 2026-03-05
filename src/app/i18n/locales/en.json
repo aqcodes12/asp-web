@@ -183,7 +183,13 @@
   },
   "productCard": {
     "shareText": "Check out {{productName}} - {{code}}",
-    "code": "Code: {{code}}"
+    "code": "Code: {{code}}",
+    "viewDetails": "View Details",
+    "badges": {
+      "new": "NEW",
+      "offer": "OFFER",
+      "featured": "FEATURED"
+    }
   },
   "productDetail": {
     "notFound": "Product Not Found",

@@ -45,6 +45,8 @@ function ProductsPage() {
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
 
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     if (category === "all") {
       setSearchParams({});
       return;
@@ -82,10 +84,18 @@ function ProductsPage() {
 
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="hidden lg:block lg:col-span-3">
-            <div className="bg-white rounded-2xl p-6 sticky top-24" style={{ border: "1px solid #E2E8F0", boxShadow: "0 4px 14px rgba(15, 23, 42, 0.06)" }}>
+            <div
+    className="bg-white rounded-2xl p-6 sticky top-24"
+    style={{
+      border: "1px solid #E2E8F0",
+      boxShadow: "0 4px 14px rgba(15, 23, 42, 0.06)",
+      maxHeight: "calc(100vh - 7.5rem)",
+      overflowY: "auto"
+    }}
+  >
               <div className="mb-6">
                 <h3 className="mb-4" style={{ color: "#0A2540" }}>{t("common.categories")}</h3>
-                <div className="space-y-2">
+                <div className="space-y-2" style={{ maxHeight: "50vh", overflowY: "auto" }}>
                   <button
     onClick={() => handleCategoryChange("all")}
     className="w-full text-start px-4 py-2.5 rounded-lg transition-colors"
@@ -146,7 +156,7 @@ function ProductsPage() {
             {mobileFiltersOpen && <div className="mt-4 bg-white rounded-2xl p-6" style={{ border: "1px solid #E2E8F0", boxShadow: "0 4px 14px rgba(15, 23, 42, 0.06)" }}>
                 <div className="mb-6">
                   <h3 className="mb-4" style={{ color: "#0A2540" }}>{t("common.categories")}</h3>
-                  <div className="space-y-2">
+                  <div className="space-y-2" style={{ maxHeight: "50vh", overflowY: "auto" }}>
                     <button
     onClick={() => {
       handleCategoryChange("all");
