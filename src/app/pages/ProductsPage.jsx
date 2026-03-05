@@ -4,7 +4,7 @@ import { Search, SlidersHorizontal } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "../components/ProductCard";
-import { products, categories } from "../data/products";
+import { products, categories, getProductName } from "../data/products";
 
 function ProductsPage() {
   const { t, i18n } = useTranslation();
@@ -24,12 +24,12 @@ function ProductsPage() {
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter((product) => t(product.nameKey).toLowerCase().includes(query) || product.code.toLowerCase().includes(query) || t(`categories.${product.category}`).toLowerCase().includes(query));
+      filtered = filtered.filter((product) => getProductName(product, i18n.language).toLowerCase().includes(query) || product.code.toLowerCase().includes(query) || product.categoryName.toLowerCase().includes(query));
     }
 
     filtered.sort((a, b) => {
       if (sortBy === "name") {
-        return t(a.nameKey).localeCompare(t(b.nameKey), i18n.language);
+        return getProductName(a, i18n.language).localeCompare(getProductName(b, i18n.language), i18n.language);
       }
 
       if (sortBy === "code") {
@@ -40,7 +40,7 @@ function ProductsPage() {
     });
 
     return filtered;
-  }, [i18n.language, searchQuery, selectedCategory, sortBy, t]);
+  }, [i18n.language, searchQuery, selectedCategory, sortBy]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -109,7 +109,7 @@ function ProductsPage() {
       borderInlineStart: selectedCategory === category.id ? "3px solid #2F6FED" : "3px solid transparent"
     }}
   >
-                      {t(category.nameKey)}
+                      {category.name}
                     </button>)}
                 </div>
               </div>
@@ -176,7 +176,7 @@ function ProductsPage() {
       borderInlineStart: selectedCategory === category.id ? "3px solid #2F6FED" : "3px solid transparent"
     }}
   >
-                        {t(category.nameKey)}
+                        {category.name}
                       </button>)}
                   </div>
                 </div>

@@ -10,6 +10,7 @@ import heroImage from "../../assets/hero.jpeg";
 function HomePage() {
   const { t, i18n } = useTranslation();
   const featuredProducts = products.filter((product) => product.featured).slice(0, 8);
+  const homepageCategories = categories.slice(0, 6);
   const isRTL = i18n.dir() === "rtl";
 
   const aboutHighlights = [
@@ -130,13 +131,13 @@ function HomePage() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {categories.map((category, index) => <motion.div
+          {homepageCategories.map((category, index) => <motion.div
     key={category.id}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.4, delay: index * 0.05 }}
   >
-              <CategoryCard {...category} name={t(category.nameKey)} />
+              <CategoryCard {...category} name={category.name} />
             </motion.div>)}
         </div>
       </section>

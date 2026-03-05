@@ -278,7 +278,7 @@ function CartDrawer() {
                     <p style={{ color: "#6B7280" }}>{t("cart.empty")}</p>
                   </div> : <div className="space-y-5">
                     {cartItems.map((item) => {
-                const itemName = item.nameKey ? t(item.nameKey) : item.name;
+                const itemName = item.nameKey ? t(item.nameKey) : i18n.language.startsWith("ar") && item.arabic ? item.arabic : item.name;
                 const itemColor = item.color ? t(`common.colors.${item.color}`, { defaultValue: item.color }) : "";
 
                 return <div

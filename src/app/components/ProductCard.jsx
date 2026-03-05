@@ -4,14 +4,15 @@ import { ShoppingCart, Share2, Plus, Minus } from "lucide-react";
 import { motion } from "motion/react";
 import { useCart } from "../context/CartContext";
 import { useTranslation } from "react-i18next";
+import { getProductName } from "../data/products";
 
 function ProductCard({ product }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [quantity, setQuantity] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
   const { addToCart } = useCart();
-  const productName = t(product.nameKey);
-  const categoryLabel = t(`categories.${product.category}`);
+  const productName = getProductName(product, i18n.language) || t(product.nameKey);
+  const categoryLabel = product.categoryName || t(`categories.${product.category}`, { defaultValue: product.category });
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -19,6 +20,8 @@ function ProductCard({ product }) {
       {
         id: product.id,
         nameKey: product.nameKey,
+        name: product.name,
+        arabic: product.arabic,
         code: product.code,
         category: product.category,
         image: product.image

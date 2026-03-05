@@ -4,13 +4,13 @@ import { Plus, Minus, Share2, ShoppingCart, ArrowLeft, Mail, Copy } from "lucide
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { useCart } from "../context/CartContext";
-import { products } from "../data/products";
+import { products, getProductName } from "../data/products";
 import { ProductCard } from "../components/ProductCard";
 
 function ProductDetailPage() {
   const { t, i18n } = useTranslation();
   const { id } = useParams();
-  const product = products.find((item) => item.id === id);
+  const product = products.find((item) => String(item.id) === id);
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [shareMessage, setShareMessage] = useState("");
@@ -41,14 +41,15 @@ function ProductDetailPage() {
       </div>;
   }
 
-  const productName = t(product.nameKey);
-  const productDescription = t(product.descriptionKey);
-  const productCategory = t(`categories.${product.category}`);
+  const productName = getProductName(product, i18n.language) || t(product.nameKey);
+  const translatedDescription = product.descriptionKey ? t(product.descriptionKey) : "";
+  const productDescription = product.description || (translatedDescription !== product.descriptionKey ? translatedDescription : "");
+  const productCategory = product.categoryName || t(`categories.${product.category}`, { defaultValue: product.category });
 
   const productImages = (() => {
     const explicitImages = Array.isArray(product.images) ? product.images : [];
     const categoryImages = products.filter((item) => item.category === product.category).map((item) => item.image);
-    return [...new Set([product.image, ...explicitImages, ...categoryImages])].slice(0, 5);
+    return [...new Set([product.image, ...explicitImages, ...categoryImages].filter(Boolean))].slice(0, 5);
   })();
 
   const [activeImage, setActiveImage] = useState(productImages[0]);
@@ -70,6 +71,8 @@ function ProductDetailPage() {
       {
         id: product.id,
         nameKey: product.nameKey,
+        name: product.name,
+        arabic: product.arabic,
         code: product.code,
         category: product.category,
         image: product.image,
