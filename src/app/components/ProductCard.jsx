@@ -58,11 +58,11 @@ function ProductCard({ product }) {
         {
     /* Product Image */
   }
-        <div className="relative aspect-[4/3] overflow-hidden" style={{ backgroundColor: "#F8FAFC" }}>
+        <div className="relative aspect-[4/3] p-2" style={{ backgroundColor: "#F8FAFC" }}>
           <img
     src={product.image}
     alt={productName}
-    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+    className="w-full h-full object-contain object-center"
   />
           <button
     onClick={handleShare}
