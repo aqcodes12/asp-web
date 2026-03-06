@@ -27,6 +27,7 @@ function ProductCard({ product }) {
 
   const handleAddToCart = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     if (product.hasVariants) {
       navigate(`/products/${product.id}`);
@@ -48,6 +49,7 @@ function ProductCard({ product }) {
   };
   const handleShare = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     if (navigator.share) {
       try {
         await navigator.share({
@@ -60,7 +62,8 @@ function ProductCard({ product }) {
       }
     }
   };
-  return <motion.div
+  return <Link to={`/products/${product.id}`}>
+    <motion.div
     className="bg-white rounded-2xl overflow-hidden cursor-pointer h-full flex flex-col group"
     style={{
       border: isHovered ? "1px solid #00B8D9" : "1px solid #E2E8F0",
@@ -122,7 +125,8 @@ function ProductCard({ product }) {
             </div>
           </div>
         </div>
-      </motion.div>;
+      </motion.div>
+    </Link>;
 }
 export {
   ProductCard
