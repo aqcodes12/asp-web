@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { ShoppingCart, Share2 } from "lucide-react";
+import { ShoppingCart, Share2, Eye, Plus } from "lucide-react";
 import { motion } from "motion/react";
 import { useCart } from "../context/CartContext";
 import { useTranslation } from "react-i18next";
@@ -108,17 +108,31 @@ function ProductCard({ product }) {
           <div className="mt-auto">
             <div className="grid grid-cols-2 gap-2">
               <Link
-    to={`/products/${product.id}`}
-    className="w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center transition-all hover:opacity-90"
-    style={{ backgroundColor: "#F8FAFC", color: "#1F2937", border: "1px solid #E2E8F0" }}
-  >
+                to={`/products/${product.id}`}
+                className="w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center transition-all hover:opacity-90 md:hidden"
+                style={{ backgroundColor: "#F8FAFC", color: "#1F2937", border: "1px solid #E2E8F0" }}
+              >
+                <Eye className="w-4 h-4" />
+              </Link>
+              <Link
+                to={`/products/${product.id}`}
+                className="w-full py-2 rounded-lg text-sm font-medium hidden md:flex items-center justify-center transition-all hover:opacity-90"
+                style={{ backgroundColor: "#F8FAFC", color: "#1F2937", border: "1px solid #E2E8F0" }}
+              >
                 {t("productCard.viewDetails", { defaultValue: "View Details" })}
               </Link>
               <button
-    onClick={handleAddToCart}
-    className="w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-all hover:opacity-90"
-    style={{ backgroundColor: "#1E5EFF", color: "white" }}
-  >
+                onClick={handleAddToCart}
+                className="w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-all hover:opacity-90 md:hidden"
+                style={{ backgroundColor: "#1E5EFF", color: "white" }}
+              >
+                <Plus className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleAddToCart}
+                className="w-full py-2 rounded-lg text-sm font-medium hidden md:flex items-center justify-center gap-2 transition-all hover:opacity-90"
+                style={{ backgroundColor: "#1E5EFF", color: "white" }}
+              >
                 <ShoppingCart className="w-4 h-4" />
                 <span>{t("common.addToCart")}</span>
               </button>
