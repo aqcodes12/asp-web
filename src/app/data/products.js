@@ -1,7 +1,26 @@
 import rawProducts from "../../data/products.json";
 import fallbackProductImage from "../../assets/fallback.png";
 
-const iconNames = ["Scissors", "Stethoscope", "ShieldCheck", "TestTube", "Syringe", "Heart"];
+const iconNames = ["Armchair", "Bed", "Wheelchair", "Hand", "Bandage", "User"];
+
+const categoryIconMap = {
+  "Cushions & Supports": "Armchair",
+  "Pillows": "Bed",
+  "Mobility Aids": "Accessibility",
+  "Mattresses": "Bed",
+  "Gloves": "Hand",
+  "Bandages & Dressings": "Bandage",
+  "Sexual Wellness": "User",
+  "Bathroom & Commode Aids": "Accessibility",
+  "Hot & Cold Therapy": "Bandage",
+  "Orthopedic Supports": "Armchair",
+  "Medication Aids": "Hand",
+  "Respiratory Care": "User",
+  "Rehabilitation": "Accessibility",
+  "Personal Care": "User",
+  "Foot Care": "Hand",
+  "Monitoring Devices": "User"
+};
 
 const toCategoryId = (value) => {
   const normalized = value
@@ -93,10 +112,10 @@ const products = rawProducts.map((product, index) => {
 });
 
 const categories = Array.from(new Map(products.map((product) => [product.category, product.categoryName])).entries()).map(
-  ([id, name], index) => ({
+  ([id, name]) => ({
     id,
     name,
-    icon: iconNames[index % iconNames.length]
+    icon: categoryIconMap[name] || "User"
   })
 );
 

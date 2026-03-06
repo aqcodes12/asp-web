@@ -1,25 +1,25 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import {
-  Scissors,
-  Stethoscope,
-  ShieldCheck,
-  TestTube,
-  Syringe,
-  Heart
+  Armchair,
+  Bed,
+  Accessibility,
+  Hand,
+  Bandage,
+  User
 } from "lucide-react";
 import { useState } from "react";
 const iconMap = {
-  Scissors,
-  Stethoscope,
-  ShieldCheck,
-  TestTube,
-  Syringe,
-  Heart
+  Armchair,
+  Bed,
+  Accessibility,
+  Hand,
+  Bandage,
+  User
 };
 function CategoryCard({ id, name, icon }) {
   const [isHovered, setIsHovered] = useState(false);
-  const Icon = iconMap[icon] || Heart;
+  const Icon = iconMap[icon] || User;
   return <Link to={`/products?category=${id}`} className="block h-full">
       <motion.div
     className="bg-white rounded-xl p-6 cursor-pointer h-full"

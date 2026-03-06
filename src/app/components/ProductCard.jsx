@@ -17,6 +17,14 @@ function ProductCard({ product }) {
     defaultValue: product.badge || "NEW"
   });
 
+  const badgeStyles = {
+    new: { backgroundColor: "#DBEAFE", color: "#1D4ED8" },
+    offer: { backgroundColor: "#FFEDD5", color: "#C2410C" },
+    featured: { backgroundColor: "#F3E8FF", color: "#7C3AED" }
+  };
+  const badgeType = (product.badge || "NEW").toLowerCase();
+  const currentBadgeStyle = badgeStyles[badgeType] || badgeStyles.new;
+
   const handleAddToCart = (e) => {
     e.preventDefault();
 
@@ -73,9 +81,9 @@ function ProductCard({ product }) {
     className="w-full h-full object-contain object-center"
   />
           <span
-    className="absolute top-3 left-3 text-[11px] px-2.5 py-1 rounded-full"
-    style={{ backgroundColor: "#EAF2FF", color: "#2F6FED" }}
-  >
+            className="absolute top-3 left-3 text-[11px] px-2.5 py-1 rounded-full"
+            style={currentBadgeStyle}
+          >
             {badgeLabel}
           </span>
           <button
@@ -90,7 +98,7 @@ function ProductCard({ product }) {
     /* Product Info */
   }
         <div className="p-5 flex-1 flex flex-col">
-          <h3 className="mb-1" style={{ color: "#0A2540" }}>{productName}</h3>
+          <h3 className="mb-1 line-clamp-2" style={{ color: "#0A2540" }}>{productName}</h3>
           <p className="text-sm mb-2" style={{ color: "#6B7280" }}>{t("productCard.code", { code: product.code })}</p>
           <p className="text-xs mb-4 capitalize" style={{ color: "#00B8D9" }}>{categoryLabel}</p>
 
