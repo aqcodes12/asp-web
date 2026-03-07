@@ -323,6 +323,7 @@
     "empty": "Your cart is empty",
     "subtotal": "Subtotal",
     "remove": "Remove",
+    "continueShopping": "Continue Shopping",
     "orderSubmitted": "Order inquiry submitted successfully! We will contact you shortly.",
     "itemsCount_one": "{{count}} item",
     "itemsCount_other": "{{count}} items",

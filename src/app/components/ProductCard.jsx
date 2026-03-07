@@ -64,7 +64,7 @@ function ProductCard({ product }) {
   };
   return <Link to={`/products/${product.id}`}>
     <motion.div
-    className="bg-white rounded-2xl overflow-hidden cursor-pointer h-full flex flex-col group"
+    className="bg-white rounded-2xl cursor-pointer h-full flex flex-col group overflow-visible"
     style={{
       border: isHovered ? "1px solid #00B8D9" : "1px solid #E2E8F0",
       boxShadow: isHovered ? "0 14px 32px rgba(30, 94, 255, 0.14)" : "0 4px 14px rgba(15, 23, 42, 0.06)"
@@ -77,7 +77,7 @@ function ProductCard({ product }) {
         {
     /* Product Image */
   }
-        <div className="relative aspect-[4/3] p-2" style={{ backgroundColor: "#F8FAFC" }}>
+        <div className="relative aspect-[4/3] p-2 overflow-hidden" style={{ backgroundColor: "#F8FAFC" }}>
           <img
     src={product.image}
     alt={productName}
@@ -101,7 +101,12 @@ function ProductCard({ product }) {
     /* Product Info */
   }
         <div className="p-5 flex-1 flex flex-col">
-          <h3 className="mb-1 line-clamp-2" style={{ color: "#0A2540" }}>{productName}</h3>
+          <div className="relative group/tooltip">
+            <h3 className="mb-1 line-clamp-2" style={{ color: "#0A2540" }}>{productName}</h3>
+            <div className="absolute left-0 top-full mt-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap z-50 pointer-events-none">
+              {productName}
+            </div>
+          </div>
           <p className="text-sm mb-2" style={{ color: "#6B7280" }}>{t("productCard.code", { code: product.code })}</p>
           <p className="text-xs mb-4 capitalize" style={{ color: "#00B8D9" }}>{categoryLabel}</p>
 

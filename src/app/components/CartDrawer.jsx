@@ -275,7 +275,14 @@ function CartDrawer() {
                     <div className="w-20 h-20 rounded-full mb-4 flex items-center justify-center" style={{ backgroundColor: "#E6F7FB" }}>
                       <X className="w-10 h-10" style={{ color: "#00B8D9" }} />
                     </div>
-                    <p style={{ color: "#6B7280" }}>{t("cart.empty")}</p>
+                    <p className="mb-4" style={{ color: "#6B7280" }}>{t("cart.empty")}</p>
+                    <button
+                      onClick={() => setIsCartOpen(false)}
+                      className="px-6 py-2.5 rounded-xl transition-all hover:opacity-90"
+                      style={{ backgroundColor: "#1E5EFF", color: "white" }}
+                    >
+                      {t("cart.continueShopping")}
+                    </button>
                   </div> : <div className="space-y-5">
                     {cartItems.map((item) => {
                 const itemName = item.nameKey ? t(item.nameKey) : i18n.language.startsWith("ar") && item.arabic ? item.arabic : item.name;
@@ -332,17 +339,24 @@ function CartDrawer() {
                   </div>}
               </div>
 
-              {cartItems.length > 0 && <div className="p-6 border-t" style={{ borderColor: "#E2E8F0" }}>
+              {cartItems.length > 0 && <div className="p-6 border-t space-y-3" style={{ borderColor: "#E2E8F0" }}>
                   <div className="flex items-center justify-between mb-4 px-1">
                     <span style={{ color: "#6B7280" }}>{t("cart.subtotal")}</span>
                     <span style={{ color: "#0A2540" }}>{t("cart.itemsCount", { count: subtotalItems })}</span>
                   </div>
                   <button
-    onClick={() => setShowOrderForm(true)}
-    className="w-full py-3 rounded-xl transition-all hover:opacity-90"
-    style={{ backgroundColor: "#1E5EFF", color: "white" }}
-  >
+                    onClick={() => setShowOrderForm(true)}
+                    className="w-full py-3 rounded-xl transition-all hover:opacity-90"
+                    style={{ backgroundColor: "#1E5EFF", color: "white" }}
+                  >
                     {t("cart.orderForm.submit")}
+                  </button>
+                  <button
+                    onClick={() => setIsCartOpen(false)}
+                    className="w-full py-3 rounded-xl transition-all hover:opacity-90"
+                    style={{ backgroundColor: "#F8FAFC", color: "#1F2937", border: "1px solid #E2E8F0" }}
+                  >
+                    {t("cart.continueShopping")}
                   </button>
                 </div>}
             </motion.div>
