@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router";
 import { ShoppingCart, Share2, Eye, Plus } from "lucide-react";
 import { motion } from "motion/react";
@@ -9,7 +9,15 @@ import { getProductName } from "../data/products";
 function ProductCard({ product }) {
   const { t, i18n } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
+  const [isTitleTruncated, setIsTitleTruncated] = useState(false);
+  const titleRef = useRef(null);
   const navigate = useNavigate();
+
+  const checkTitleTruncation = () => {
+    if (titleRef.current) {
+      setIsTitleTruncated(titleRef.current.scrollHeight > titleRef.current.clientHeight);
+    }
+  };
   const { addToCart } = useCart();
   const productName = getProductName(product, i18n.language) || t(product.nameKey);
   const categoryLabel = product.categoryName || t(`categories.${product.category}`, { defaultValue: product.category });
@@ -113,11 +121,13 @@ function ProductCard({ product }) {
 
         {/* Product Info */}
         <div className="p-5 flex-1 flex flex-col">
-          <div className="relative group/tooltip">
-            <h3 className="mb-1 line-clamp-2" style={{ color: "#0A2540" }}>{productName}</h3>
-            <div className="absolute left-0 top-full mt-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap z-50 pointer-events-none">
-              {productName}
-            </div>
+          <div className="relative group/title" onMouseEnter={checkTitleTruncation}>
+            <h3 ref={titleRef} className="mb-1 line-clamp-2" style={{ color: "#0A2540" }}>{productName}</h3>
+            {isTitleTruncated && (
+              <div className="absolute left-0 top-full mt-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover/title:opacity-100 transition-opacity whitespace-nowrap z-50 pointer-events-none">
+                {productName}
+              </div>
+            )}
           </div>
           <p className="text-sm mb-2" style={{ color: "#6B7280" }}>{t("productCard.code", { code: product.code })}</p>
           <p className="text-xs mb-4 capitalize" style={{ color: "#00B8D9" }}>{categoryLabel}</p>
