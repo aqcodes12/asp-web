@@ -71,7 +71,7 @@ function HomePage() {
   >
                 <Link
     to="/products"
-    className="px-8 py-4 rounded-2xl flex items-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-lg"
+    className="px-8 py-4 rounded-2xl flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.97]"
     style={{ backgroundColor: "#1E5EFF", color: "white" }}
   >
                   <span>{t("home.hero.viewProducts")}</span>
@@ -79,7 +79,7 @@ function HomePage() {
                 </Link>
                 <Link
     to="/contact"
-    className="px-8 py-4 rounded-2xl flex items-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-lg border"
+    className="px-8 py-4 rounded-2xl flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.97] border"
     style={{ borderColor: "#BFDBFE", backgroundColor: "#EFF6FF", color: "#1E5EFF" }}
   >
                   <span>{t("home.hero.contactUs")}</span>
@@ -163,7 +163,7 @@ function HomePage() {
         <div className="text-center mt-12">
           <Link
     to="/products"
-    className="inline-flex items-center gap-2 px-8 py-3 rounded-xl transition-all hover:opacity-90"
+    className="inline-flex items-center gap-2 px-8 py-3 rounded-xl transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.97]"
     style={{ backgroundColor: "#1E5EFF", color: "white" }}
   >
             <span>{t("home.featured.viewAll")}</span>
@@ -193,7 +193,7 @@ function HomePage() {
               </div>
               <Link
     to="/about"
-    className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-xl transition-all hover:opacity-90"
+    className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-xl transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.97]"
     style={{ backgroundColor: "#1E5EFF", color: "white" }}
   >
                 <span>{t("home.aboutPreview.learnMore")}</span>
@@ -201,21 +201,36 @@ function HomePage() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white p-6 rounded-xl text-center" style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)" }}>
+              <motion.div
+                className="bg-white p-6 rounded-xl text-center"
+                style={{ border: "1px solid #E2E8F0", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)" }}
+                whileHover={{ y: -4, boxShadow: "0 10px 24px rgba(30, 94, 255, 0.10)" }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+              >
                 <Users className="w-12 h-12 mx-auto mb-4" style={{ color: "#1E5EFF" }} />
                 <div className="text-3xl mb-2" style={{ color: "#0A2540" }}>500+</div>
                 <p className="text-sm" style={{ color: "#6B7280" }}>{t("home.aboutPreview.cards.clients")}</p>
-              </div>
-              <div className="bg-white p-6 rounded-xl text-center" style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)" }}>
+              </motion.div>
+              <motion.div
+                className="bg-white p-6 rounded-xl text-center"
+                style={{ border: "1px solid #E2E8F0", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)" }}
+                whileHover={{ y: -4, boxShadow: "0 10px 24px rgba(0, 184, 217, 0.12)" }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+              >
                 <Package className="w-12 h-12 mx-auto mb-4" style={{ color: "#00B8D9" }} />
                 <div className="text-3xl mb-2" style={{ color: "#0A2540" }}>2000+</div>
                 <p className="text-sm" style={{ color: "#6B7280" }}>{t("home.aboutPreview.cards.products")}</p>
-              </div>
-              <div className="bg-white p-6 rounded-xl text-center col-span-2" style={{ boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)" }}>
+              </motion.div>
+              <motion.div
+                className="bg-white p-6 rounded-xl text-center col-span-2"
+                style={{ border: "1px solid #E2E8F0", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)" }}
+                whileHover={{ y: -4, boxShadow: "0 10px 24px rgba(30, 94, 255, 0.10)" }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+              >
                 <Headset className="w-12 h-12 mx-auto mb-4" style={{ color: "#1E5EFF" }} />
                 <div className="text-3xl mb-2" style={{ color: "#0A2540" }}>24/7</div>
                 <p className="text-sm" style={{ color: "#6B7280" }}>{t("home.aboutPreview.cards.support")}</p>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -231,7 +246,7 @@ function HomePage() {
           </p>
           <Link
     to="/contact"
-    className="inline-flex items-center gap-2 px-8 py-3 rounded-xl transition-all hover:opacity-90"
+    className="inline-flex items-center gap-2 px-8 py-3 rounded-xl transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.97]"
     style={{ backgroundColor: "#1E5EFF", color: "white" }}
   >
             <span>{t("home.cta.button")}</span>

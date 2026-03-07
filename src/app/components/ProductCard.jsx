@@ -47,6 +47,7 @@ function ProductCard({ product }) {
       1
     );
   };
+
   const handleShare = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -62,44 +63,55 @@ function ProductCard({ product }) {
       }
     }
   };
-  return <Link to={`/products/${product.id}`}>
-    <motion.div
-    className="bg-white rounded-2xl cursor-pointer h-full flex flex-col group overflow-visible"
-    style={{
-      border: isHovered ? "1px solid #00B8D9" : "1px solid #E2E8F0",
-      boxShadow: isHovered ? "0 14px 32px rgba(30, 94, 255, 0.14)" : "0 4px 14px rgba(15, 23, 42, 0.06)"
-    }}
-    onMouseEnter={() => setIsHovered(true)}
-    onMouseLeave={() => setIsHovered(false)}
-    whileHover={{ y: -5 }}
-    transition={{ duration: 0.22, ease: "easeOut" }}
-  >
-        {
-    /* Product Image */
-  }
-        <div className="relative aspect-[4/3] p-2 overflow-hidden" style={{ backgroundColor: "#F8FAFC" }}>
+
+  return (
+    <Link to={`/products/${product.id}`} className="block h-full">
+      <motion.div
+        className="bg-white rounded-2xl cursor-pointer h-full flex flex-col group"
+        style={{
+          border: isHovered ? "1px solid #00B8D9" : "1px solid #E2E8F0",
+          boxShadow: isHovered
+            ? "0 14px 32px rgba(30, 94, 255, 0.14)"
+            : "0 4px 14px rgba(15, 23, 42, 0.06)",
+          overflow: "visible",
+          position: "relative",
+          zIndex: isHovered ? 10 : undefined
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        whileHover={{ y: -5 }}
+        transition={{ duration: 0.22, ease: "easeOut" }}
+      >
+        {/* Product Image */}
+        <div
+          className="relative aspect-[4/3] p-2 overflow-hidden rounded-t-2xl"
+          style={{ backgroundColor: "#F8FAFC" }}
+        >
           <img
-    src={product.image}
-    alt={productName}
-    className="w-full h-full object-contain object-center"
-  />
+            src={product.image}
+            alt={productName}
+            className="w-full h-full object-contain object-center"
+          />
           <span
-            className="absolute top-3 left-3 text-[11px] px-2.5 py-1 rounded-full"
+            className="absolute top-3 left-3 z-10 text-[11px] px-2.5 py-1 rounded-full font-medium"
             style={currentBadgeStyle}
           >
             {badgeLabel}
           </span>
-          <button
-    onClick={handleShare}
-    className="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-50 transition-colors"
-  >
+          <motion.button
+            onClick={handleShare}
+            className="absolute top-3 right-3 z-10 w-8 h-8 bg-white rounded-full flex items-center justify-center"
+            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.14)" }}
+            whileHover={{ scale: 1.12 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.15 }}
+            aria-label="Share product"
+          >
             <Share2 className="w-4 h-4" style={{ color: "#6B7280" }} />
-          </button>
+          </motion.button>
         </div>
 
-        {
-    /* Product Info */
-  }
+        {/* Product Info */}
         <div className="p-5 flex-1 flex flex-col">
           <div className="relative group/tooltip">
             <h3 className="mb-1 line-clamp-2" style={{ color: "#0A2540" }}>{productName}</h3>
@@ -114,28 +126,28 @@ function ProductCard({ product }) {
             <div className="grid grid-cols-2 gap-2">
               <Link
                 to={`/products/${product.id}`}
-                className="w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center transition-all hover:opacity-90 md:hidden"
+                className="w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center transition-all duration-200 hover:opacity-90 active:scale-[0.97] md:hidden"
                 style={{ backgroundColor: "#F8FAFC", color: "#1F2937", border: "1px solid #E2E8F0" }}
               >
                 <Eye className="w-4 h-4" />
               </Link>
               <Link
                 to={`/products/${product.id}`}
-                className="w-full py-2 rounded-lg text-sm font-medium hidden md:flex items-center justify-center transition-all hover:opacity-90"
+                className="w-full py-2 rounded-lg text-sm font-medium hidden md:flex items-center justify-center transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
                 style={{ backgroundColor: "#F8FAFC", color: "#1F2937", border: "1px solid #E2E8F0" }}
               >
                 {t("productCard.viewDetails", { defaultValue: "View Details" })}
               </Link>
               <button
                 onClick={handleAddToCart}
-                className="w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-all hover:opacity-90 md:hidden"
+                className="w-full py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-all duration-200 hover:opacity-90 active:scale-[0.97] md:hidden"
                 style={{ backgroundColor: "#1E5EFF", color: "white" }}
               >
                 <Plus className="w-4 h-4" />
               </button>
               <button
                 onClick={handleAddToCart}
-                className="w-full py-2 rounded-lg text-sm font-medium hidden md:flex items-center justify-center gap-2 transition-all hover:opacity-90"
+                className="w-full py-2 rounded-lg text-sm font-medium hidden md:flex items-center justify-center gap-2 transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
                 style={{ backgroundColor: "#1E5EFF", color: "white" }}
               >
                 <ShoppingCart className="w-4 h-4" />
@@ -145,8 +157,10 @@ function ProductCard({ product }) {
           </div>
         </div>
       </motion.div>
-    </Link>;
+    </Link>
+  );
 }
+
 export {
   ProductCard
 };

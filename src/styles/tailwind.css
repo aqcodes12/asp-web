@@ -11,3 +11,27 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Nav link animated underline */
+.nav-link-hover {
+  position: relative;
+}
+
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #1E5EFF;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+
+.nav-link-hover:hover::after,
+.nav-link-hover.active-link::after {
+  transform: scaleX(1);
+}

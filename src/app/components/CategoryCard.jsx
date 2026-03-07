@@ -24,8 +24,9 @@ function CategoryCard({ id, name, icon }) {
       <motion.div
     className="bg-white rounded-xl p-6 cursor-pointer h-full"
     style={{
-      border: "1px solid #E2E8F0",
-      boxShadow: isHovered ? "0 14px 30px rgba(30, 94, 255, 0.14)" : "0 4px 14px rgba(15, 23, 42, 0.06)"
+      border: isHovered ? "1px solid #00B8D9" : "1px solid #E2E8F0",
+      boxShadow: isHovered ? "0 14px 30px rgba(30, 94, 255, 0.14)" : "0 4px 14px rgba(15, 23, 42, 0.06)",
+      transition: "border-color 0.22s ease, box-shadow 0.22s ease"
     }}
     onMouseEnter={() => setIsHovered(true)}
     onMouseLeave={() => setIsHovered(false)}
