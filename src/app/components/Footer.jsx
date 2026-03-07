@@ -90,7 +90,17 @@ function Footer() {
   }
         <div className="border-t mt-8 pt-8" style={{ borderColor: "#E2E8F0" }}>
           <p className="text-sm text-center" style={{ color: "#6B7280" }}>
-            {t("footer.copyright")}
+            ©️ All Rights Reserved By{" "}
+            <a
+              href="https://www.ex-ion.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium transition-colors duration-200 hover:underline"
+              style={{ color: "#1E5EFF" }}
+            >
+              Ex-ion
+            </a>{" "}
+            2026
           </p>
         </div>
       </div>
