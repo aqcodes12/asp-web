@@ -49,6 +49,9 @@ function Navbar() {
             <NavLink to="/products" className={getDesktopNavLinkClassName}>
               {t("nav.products")}
             </NavLink>
+            <NavLink to="/offers" className={getDesktopNavLinkClassName}>
+              {t("nav.offers")}
+            </NavLink>
             <NavLink to="/about" className={getDesktopNavLinkClassName}>
               {t("nav.about")}
             </NavLink>
@@ -147,6 +150,13 @@ function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {t("nav.products")}
+                </NavLink>
+                <NavLink
+                  to="/offers"
+                  className={getMobileNavLinkClassName}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {t("nav.offers")}
                 </NavLink>
                 <NavLink
                   to="/about"
