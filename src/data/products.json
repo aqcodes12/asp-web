@@ -66,7 +66,7 @@
   {
     "id": 9,
     "code": "AM404506",
-    "name": "Memory Foam Wheel Chair Cushion",
+    "name": "Memory Foam wheelchair Cushion",
     "arabic": "وسادة رغوية للكرسي",
     "category": "Mobility Aids",
     "image": "/ItemImages/AM404506.jpg"
@@ -74,7 +74,7 @@
   {
     "id": 10,
     "code": "AM404506#2+1",
-    "name": "Memory Foam Wheel Chair Cushion-2+1",
+    "name": "Memory Foam wheelchair Cushion-2+1",
     "arabic": "وسادة رغوية للكرسي",
     "category": "Mobility Aids",
     "image": "/ItemImages/AM404506#2+1.jpg"
@@ -2514,7 +2514,7 @@
   {
     "id": 315,
     "code": "GT3004",
-    "name": "Elbow Crutches Big Cuff ALMNM",
+    "name": "Elbow Crutches Big Cuff aluminum",
     "arabic": "عكاز",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT3004.jpg"
@@ -2850,7 +2850,7 @@
   {
     "id": 357,
     "code": "GT8000",
-    "name": "Wheel Chair Standard",
+    "name": "wheelchair Standard",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": null
@@ -2858,7 +2858,7 @@
   {
     "id": 358,
     "code": "GT8000H",
-    "name": "Wheel Chair Standard for Hajj, Umrah 18\"",
+    "name": "wheelchair Standard for Hajj, Umrah 18\"",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT8000H.jpg"
@@ -2866,7 +2866,7 @@
   {
     "id": 359,
     "code": "GT8000W",
-    "name": "Wheel Chair Standard Wide (50 cm)",
+    "name": "wheelchair Standard Wide (50 cm)",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT8000W.jpg"
@@ -2874,7 +2874,7 @@
   {
     "id": 360,
     "code": "GT8000XL",
-    "name": "Wheel Chair Heavy Duty (Capacity175Kg) Wide-24\"",
+    "name": "wheelchair Heavy Duty (Capacity175Kg) Wide-24\"",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": null
@@ -2882,7 +2882,7 @@
   {
     "id": 361,
     "code": "GT8005C",
-    "name": "Wheel Chair with Commode",
+    "name": "wheelchair with Commode",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT8005C.jpg"
@@ -2890,7 +2890,7 @@
   {
     "id": 362,
     "code": "GT8008",
-    "name": "Wheel Chair Aluminum",
+    "name": "wheelchair Aluminum",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT8008.jpg"
@@ -2898,7 +2898,7 @@
   {
     "id": 363,
     "code": "GT8008W",
-    "name": "Wheel Chair Aluminum 20\" Wide",
+    "name": "wheelchair Aluminum 20\" Wide",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT8008W.jpg"
@@ -2906,7 +2906,7 @@
   {
     "id": 364,
     "code": "GT8008XL",
-    "name": "Wheel Chair Aluminum 22\" Wide",
+    "name": "wheelchair Aluminum 22\" Wide",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": null
@@ -2914,7 +2914,7 @@
   {
     "id": 365,
     "code": "GT8010",
-    "name": "Wheel Chair Aluminum Mag Wheels",
+    "name": "wheelchair Aluminum Mag Wheels",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT8010.jpg"
@@ -2922,7 +2922,7 @@
   {
     "id": 366,
     "code": "GT8010W",
-    "name": "Wheel Chair Almnm Mag Wheels 20\" Wide",
+    "name": "wheelchair aluminum Mag Wheels 20\" Wide",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT8010W.jpg"
@@ -2930,7 +2930,7 @@
   {
     "id": 367,
     "code": "GT8010XL",
-    "name": "Wheel Chair Almnm Mag Wheels 22\" Wide",
+    "name": "wheelchair aluminum Mag Wheels 22\" Wide",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": null
@@ -2938,7 +2938,7 @@
   {
     "id": 368,
     "code": "GT8012-16",
-    "name": "Wheel Chair Detachable Armrest, Riseup footrest 16\"",
+    "name": "wheelchair Detachable Armrest, Riseup footrest 16\"",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT8012-16.jpg"
@@ -2946,7 +2946,7 @@
   {
     "id": 369,
     "code": "GT8012-18",
-    "name": "Wheel Chair Detachable Armrest, Riseup footrest 18\"",
+    "name": "wheelchair Detachable Armrest, Riseup footrest 18\"",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT8012-18.jpg"
@@ -2954,7 +2954,7 @@
   {
     "id": 370,
     "code": "GT8012-20",
-    "name": "Wheel Chair Detachable Armrest, Riseup footrest 20\"",
+    "name": "wheelchair Detachable Armrest, Riseup footrest 20\"",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": "/ItemImages/GT8012-20.jpg"
@@ -3090,7 +3090,7 @@
   {
     "id": 387,
     "code": "GT809",
-    "name": "Advanced Wheel Chair (Credit)",
+    "name": "Advanced wheelchair (Credit)",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": null
@@ -3098,7 +3098,7 @@
   {
     "id": 388,
     "code": "GT809C",
-    "name": "Advanced Wheel Chair (Cash Discount Price)",
+    "name": "Advanced wheelchair (Cash Discount Price)",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": null
@@ -3106,7 +3106,7 @@
   {
     "id": 389,
     "code": "GT809S",
-    "name": "Advanced Wheel Chair (16\") Child",
+    "name": "Advanced wheelchair (16\") Child",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": null
@@ -3114,7 +3114,7 @@
   {
     "id": 390,
     "code": "GT809SX",
-    "name": "Advanced Wheel Chair (14\") Child",
+    "name": "Advanced wheelchair (14\") Child",
     "arabic": "كرسي للمقعدين",
     "category": "Mobility Aids",
     "image": null
