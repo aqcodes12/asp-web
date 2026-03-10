@@ -7,6 +7,12 @@
     "offers": "Offers",
     "toggleLanguage": "Switch language"
   },
+  "offers": {
+    "title": "Special Offers",
+    "subtitle": "Exclusive deals and bundle offers on our medical supplies",
+    "searchPlaceholder": "Search offers by name, code or category...",
+    "noResults": "No offers found matching your search."
+  },
   "common": {
     "categories": "Categories",
     "contactUs": "Contact Us",
