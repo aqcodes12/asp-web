@@ -1,10 +1,16 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { Search } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { ProductCard } from "../components/ProductCard";
-import { products, categories, getProductName } from "../data/products";
+import { getProducts } from "../../services/productService";
+import { getCategories } from "../../services/categoryService";
+
+const getProductName = (product, language) => {
+  if (language?.startsWith("ar") && product.arabic) return product.arabic;
+  return product.name || "";
+};
 
 function ProductsPage() {
   const { t, i18n } = useTranslation();
@@ -12,7 +18,22 @@ function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "all");
   const [sortBy, setSortBy] = useState("name");
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const isRTL = i18n.dir() === "rtl";
+
+  useEffect(() => {
+    setLoading(true);
+    getProducts()
+      .then(setProducts)
+      .catch(() => {})
+      .finally(() => setLoading(false));
+
+    getCategories()
+      .then(setCategories)
+      .catch(() => {});
+  }, []);
 
   const filteredProducts = useMemo(() => {
     let filtered = [...products];
@@ -39,7 +60,7 @@ function ProductsPage() {
     });
 
     return filtered;
-  }, [i18n.language, searchQuery, selectedCategory, sortBy]);
+  }, [products, i18n.language, searchQuery, selectedCategory, sortBy]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -53,6 +74,14 @@ function ProductsPage() {
 
     setSearchParams({ category });
   };
+
+  if (loading) {
+    return (
+      <div style={{ backgroundColor: "#F8FAFC", minHeight: "calc(100vh - 64px)" }} className="flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: "#1E5EFF", borderTopColor: "transparent" }} />
+      </div>
+    );
+  }
 
   return <div style={{ backgroundColor: "#F8FAFC", minHeight: "calc(100vh - 64px)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

@@ -1,31 +1,13 @@
 import { X, Plus, Minus, Trash2, Phone, Check } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useCart } from "../context/CartContext";
+import { getSalesmen } from "../../services/salesmanService";
+import { createOrder } from "../../services/orderService";
+import { showSuccessToast } from "../../utils/toastConfig";
 
-const salesTeam = [
-  {
-    id: "ahmed",
-    nameKey: "cart.sales.ahmed.name",
-    specialtyKey: "cart.sales.ahmed.specialty",
-    phone: "+966xxxx",
-  },
-  {
-    id: "khalid",
-    nameKey: "cart.sales.khalid.name",
-    specialtyKey: "cart.sales.khalid.specialty",
-    phone: "+966xxxx",
-  },
-  {
-    id: "faisal",
-    nameKey: "cart.sales.faisal.name",
-    specialtyKey: "cart.sales.faisal.specialty",
-    phone: "+966xxxx",
-  },
-];
-
-function OrderFormModal({ isOpen, onClose, onSubmit }) {
+function OrderFormModal({ isOpen, onClose, onSubmit, salesmen, salesmenLoading, isSubmitting }) {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
     customerName: "",
@@ -33,7 +15,7 @@ function OrderFormModal({ isOpen, onClose, onSubmit }) {
     email: "",
     phone: "",
     notes: "",
-    selectedSalesman: "",
+    selectedSalesmanId: "",
   });
 
   const inputClassName =
@@ -46,20 +28,14 @@ function OrderFormModal({ isOpen, onClose, onSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const selectedSalesman = salesTeam.find(
-      (salesman) => salesman.id === formData.selectedSalesman,
-    );
-    onSubmit({
-      ...formData,
-      selectedSalesman,
-    });
+    onSubmit(formData);
     setFormData({
       customerName: "",
       companyName: "",
       email: "",
       phone: "",
       notes: "",
-      selectedSalesman: "",
+      selectedSalesmanId: "",
     });
   };
 
@@ -127,62 +103,74 @@ function OrderFormModal({ isOpen, onClose, onSubmit }) {
                     >
                       {t("cart.orderForm.chooseSalesman")}
                     </label>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      {salesTeam.map((salesman) => (
-                        <button
-                          key={salesman.id}
-                          type="button"
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              selectedSalesman: salesman.id,
-                            })
-                          }
-                          className="text-start p-4 rounded-xl transition-all hover:-translate-y-0.5"
-                          style={{
-                            border: `1px solid ${formData.selectedSalesman === salesman.id ? "#1E5EFF" : "#DCE4EF"}`,
-                            backgroundColor:
-                              formData.selectedSalesman === salesman.id
-                                ? "#EFF6FF"
-                                : "white",
-                            boxShadow:
-                              formData.selectedSalesman === salesman.id
-                                ? "0 6px 14px rgba(30, 94, 255, 0.15)"
-                                : "0 2px 8px rgba(15, 23, 42, 0.05)",
-                          }}
-                        >
-                          <div className="flex items-center justify-between gap-3 mb-2">
-                            <p style={{ color: "#0A2540" }}>
-                              {t(salesman.nameKey)}
-                            </p>
-                            <span
-                              className="w-5 h-5 rounded-full flex items-center justify-center"
-                              style={{
-                                backgroundColor:
-                                  formData.selectedSalesman === salesman.id
-                                    ? "#1E5EFF"
-                                    : "#E2E8F0",
-                              }}
-                            >
-                              <Check
-                                className="w-3.5 h-3.5"
-                                style={{ color: "white" }}
-                              />
-                            </span>
-                          </div>
-                          <p className="text-sm" style={{ color: "#475569" }}>
-                            {t(salesman.specialtyKey)}
-                          </p>
-                          <p
-                            className="text-sm mt-2 flex items-center gap-1.5"
-                            style={{ color: "#1E5EFF" }}
+
+                    {salesmenLoading ? (
+                      <div className="flex justify-center py-4">
+                        <div
+                          className="w-6 h-6 rounded-full border-2 border-t-transparent animate-spin"
+                          style={{ borderColor: "#1E5EFF", borderTopColor: "transparent" }}
+                        />
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        {salesmen.map((salesman) => (
+                          <button
+                            key={salesman._id}
+                            type="button"
+                            onClick={() =>
+                              setFormData({
+                                ...formData,
+                                selectedSalesmanId: salesman._id,
+                              })
+                            }
+                            className="text-start p-4 rounded-xl transition-all hover:-translate-y-0.5"
+                            style={{
+                              border: `1px solid ${formData.selectedSalesmanId === salesman._id ? "#1E5EFF" : "#DCE4EF"}`,
+                              backgroundColor:
+                                formData.selectedSalesmanId === salesman._id
+                                  ? "#EFF6FF"
+                                  : "white",
+                              boxShadow:
+                                formData.selectedSalesmanId === salesman._id
+                                  ? "0 6px 14px rgba(30, 94, 255, 0.15)"
+                                  : "0 2px 8px rgba(15, 23, 42, 0.05)",
+                            }}
                           >
-                            <Phone className="w-3.5 h-3.5" />
-                            {salesman.phone}
-                          </p>
-                        </button>
-                      ))}
-                    </div>
+                            <div className="flex items-center justify-between gap-3 mb-2">
+                              <p style={{ color: "#0A2540" }}>{salesman.name}</p>
+                              <span
+                                className="w-5 h-5 rounded-full flex items-center justify-center"
+                                style={{
+                                  backgroundColor:
+                                    formData.selectedSalesmanId === salesman._id
+                                      ? "#1E5EFF"
+                                      : "#E2E8F0",
+                                }}
+                              >
+                                <Check
+                                  className="w-3.5 h-3.5"
+                                  style={{ color: "white" }}
+                                />
+                              </span>
+                            </div>
+                            {salesman.specialty && (
+                              <p className="text-sm" style={{ color: "#475569" }}>
+                                {salesman.specialty}
+                              </p>
+                            )}
+                            {salesman.phone && (
+                              <p
+                                className="text-sm mt-2 flex items-center gap-1.5"
+                                style={{ color: "#1E5EFF" }}
+                              >
+                                <Phone className="w-3.5 h-3.5" />
+                                {salesman.phone}
+                              </p>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -325,22 +313,25 @@ function OrderFormModal({ isOpen, onClose, onSubmit }) {
 
                   <button
                     type="submit"
-                    disabled={!formData.selectedSalesman}
+                    disabled={!formData.selectedSalesmanId || isSubmitting}
                     className="w-full py-3.5 rounded-xl transition-all"
                     style={{
-                      backgroundColor: formData.selectedSalesman
-                        ? "#1E5EFF"
-                        : "#93C5FD",
+                      backgroundColor:
+                        formData.selectedSalesmanId && !isSubmitting
+                          ? "#1E5EFF"
+                          : "#93C5FD",
                       color: "white",
-                      cursor: formData.selectedSalesman
-                        ? "pointer"
-                        : "not-allowed",
-                      boxShadow: formData.selectedSalesman
-                        ? "0 8px 20px rgba(30, 94, 255, 0.3)"
-                        : "none",
+                      cursor:
+                        formData.selectedSalesmanId && !isSubmitting
+                          ? "pointer"
+                          : "not-allowed",
+                      boxShadow:
+                        formData.selectedSalesmanId && !isSubmitting
+                          ? "0 8px 20px rgba(30, 94, 255, 0.3)"
+                          : "none",
                     }}
                   >
-                    {t("cart.orderForm.submit")}
+                    {isSubmitting ? t("common.submitting") || "Submitting..." : t("cart.orderForm.submit")}
                   </button>
                 </form>
               </div>
@@ -363,15 +354,56 @@ function CartDrawer() {
     clearCart,
   } = useCart();
   const [showOrderForm, setShowOrderForm] = useState(false);
+  const [salesmen, setSalesmen] = useState([]);
+  const [salesmenLoading, setSalesmenLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const subtotalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const isRTL = i18n.dir() === "rtl";
 
-  const handleSubmitOrder = (formData) => {
-    console.log("Order submitted:", { formData, items: cartItems });
-    alert(t("cart.orderSubmitted"));
-    clearCart();
-    setShowOrderForm(false);
-    setIsCartOpen(false);
+  useEffect(() => {
+    if (showOrderForm && salesmen.length === 0) {
+      setSalesmenLoading(true);
+      getSalesmen()
+        .then((data) => {
+          const list = data?.data || data?.salesmen || data || [];
+          setSalesmen(Array.isArray(list) ? list : []);
+        })
+        .catch(() => {})
+        .finally(() => setSalesmenLoading(false));
+    }
+  }, [showOrderForm]);
+
+  const handleSubmitOrder = async (formData) => {
+    setIsSubmitting(true);
+    try {
+      const payload = {
+        salesmanId: formData.selectedSalesmanId,
+        customerName: formData.customerName,
+        companyName: formData.companyName,
+        phone: formData.phone,
+        items: cartItems.map((item) => {
+          const orderItem = {
+            productId: item.id,
+            quantity: item.quantity,
+          };
+          if (item.size || item.color) {
+            orderItem.variant = {};
+            if (item.size) orderItem.variant.size = item.size;
+            if (item.color) orderItem.variant.color = item.color;
+          }
+          return orderItem;
+        }),
+      };
+      await createOrder(payload);
+      showSuccessToast(t("cart.orderSubmitted"));
+      clearCart();
+      setShowOrderForm(false);
+      setIsCartOpen(false);
+    } catch {
+      // error toast handled by axios interceptor
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -592,6 +624,9 @@ function CartDrawer() {
         isOpen={showOrderForm}
         onClose={() => setShowOrderForm(false)}
         onSubmit={handleSubmitOrder}
+        salesmen={salesmen}
+        salesmenLoading={salesmenLoading}
+        isSubmitting={isSubmitting}
       />
     </>
   );

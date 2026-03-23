@@ -1,28 +1,69 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router";
 import { Plus, Minus, Share2, ShoppingCart, ArrowLeft, Mail, Copy } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { useCart } from "../context/CartContext";
-import { products, getProductName } from "../data/products";
+import { getProductById, getProducts } from "../../services/productService";
 import { ProductCard } from "../components/ProductCard";
+
+const getProductName = (product, language) => {
+  if (language?.startsWith("ar") && product.arabic) return product.arabic;
+  return product.name || "";
+};
 
 function ProductDetailPage() {
   const { t, i18n } = useTranslation();
   const { id } = useParams();
-  const product = products.find((item) => String(item.id) === id);
   const { addToCart } = useCart();
+  const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [shareMessage, setShareMessage] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [variantError, setVariantError] = useState("");
+  const [activeImage, setActiveImage] = useState("");
   const isRTL = i18n.dir() === "rtl";
+
+  useEffect(() => {
+    setLoading(true);
+    setSelectedSize("");
+    setSelectedColor("");
+    setQuantity(1);
+    setActiveImage("");
+    getProductById(id)
+      .then((prod) => {
+        setProduct(prod);
+        if (prod) {
+          const images = [...new Set([prod.image, ...prod.images].filter(Boolean))];
+          setActiveImage(images[0] || "");
+          getProducts()
+            .then((all) =>
+              setRelatedProducts(
+                all.filter((p) => p.category === prod.category && p.id !== prod.id).slice(0, 4)
+              )
+            )
+            .catch(() => {});
+        }
+      })
+      .catch(() => setProduct(null))
+      .finally(() => setLoading(false));
+  }, [id]);
 
   const sizeOptions = Array.isArray(product?.sizes) ? product.sizes : [];
   const colorOptions = Array.isArray(product?.colors) ? product.colors : [];
   const requiresSize = sizeOptions.length > 0;
   const requiresColor = colorOptions.length > 0;
+
+  if (loading) {
+    return (
+      <div style={{ backgroundColor: "#F8FAFC", minHeight: "calc(100vh - 64px)" }} className="flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: "#1E5EFF", borderTopColor: "transparent" }} />
+      </div>
+    );
+  }
 
   if (!product) {
     return <div style={{ backgroundColor: "#F8FAFC", minHeight: "calc(100vh - 64px)" }}>
@@ -40,19 +81,11 @@ function ProductDetailPage() {
       </div>;
   }
 
-  const productName = getProductName(product, i18n.language) || t(product.nameKey);
-  const translatedDescription = product.descriptionKey ? t(product.descriptionKey) : "";
-  const productDescription = product.description || (translatedDescription !== product.descriptionKey ? translatedDescription : "");
+  const productName = getProductName(product, i18n.language);
+  const productDescription = product.description || "";
   const productCategory = product.categoryName || t(`categories.${product.category}`, { defaultValue: product.category });
 
-  const productImages = (() => {
-    const explicitImages = Array.isArray(product.images) ? product.images : [];
-    const categoryImages = products.filter((item) => item.category === product.category).map((item) => item.image);
-    return [...new Set([product.image, ...explicitImages, ...categoryImages].filter(Boolean))].slice(0, 5);
-  })();
-
-  const [activeImage, setActiveImage] = useState(productImages[0]);
-  const relatedProducts = products.filter((item) => item.category === product.category && item.id !== product.id).slice(0, 4);
+  const productImages = [...new Set([product.image, ...product.images].filter(Boolean))].slice(0, 5);
 
   const handleAddToCart = () => {
     if (requiresSize && !selectedSize) {

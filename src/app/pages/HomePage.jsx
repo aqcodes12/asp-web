@@ -2,13 +2,31 @@ import { Link } from "react-router";
 import { ArrowRight, CheckCircle2, Users, Package, Headset } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
 import { CategoryCard } from "../components/CategoryCard";
 import { ProductCard } from "../components/ProductCard";
-import { categories, products } from "../data/products";
+import { getProducts } from "../../services/productService";
+import { getCategories } from "../../services/categoryService";
 import heroImage from "../../assets/hero.jpeg";
 
 function HomePage() {
   const { t, i18n } = useTranslation();
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    getProducts()
+      .then(setProducts)
+      .catch(() => {})
+      .finally(() => setLoading(false));
+
+    getCategories()
+      .then(setCategories)
+      .catch(() => {});
+  }, []);
+
   const featuredProducts = products.filter((product) => product.featured).slice(0, 8);
   const homepageCategories = categories.slice(0, 6);
   const isRTL = i18n.dir() === "rtl";
