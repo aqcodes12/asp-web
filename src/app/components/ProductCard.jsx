@@ -33,10 +33,7 @@ function ProductCard({ product }) {
   const badgeType = (product.badge || "NEW").toLowerCase();
   const currentBadgeStyle = badgeStyles[badgeType] || badgeStyles.new;
 
-  const handleAddToCart = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
+  const handleAddToCart = () => {
     if (product.hasVariants) {
       navigate(`/products/${product.id}`);
       return;
@@ -45,7 +42,6 @@ function ProductCard({ product }) {
     addToCart(
       {
         id: product.id,
-        nameKey: product.nameKey,
         name: product.name,
         arabic: product.arabic,
         code: product.code,
@@ -56,9 +52,7 @@ function ProductCard({ product }) {
     );
   };
 
-  const handleShare = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
@@ -73,7 +67,7 @@ function ProductCard({ product }) {
   };
 
   return (
-    <Link to={`/products/${product.id}`} className="block h-full">
+    <div className="block h-full">
       <motion.div
         className="bg-white rounded-2xl cursor-pointer h-full flex flex-col group"
         style={{
@@ -92,8 +86,9 @@ function ProductCard({ product }) {
       >
         {/* Product Image */}
         <div
-          className="relative aspect-[4/3] p-2 overflow-hidden rounded-t-2xl"
+          className="relative aspect-[4/3] p-2 overflow-hidden rounded-t-2xl cursor-pointer"
           style={{ backgroundColor: "#F8FAFC" }}
+          onClick={() => navigate(`/products/${product.id}`)}
         >
           <img
             src={product.image}
@@ -167,7 +162,7 @@ function ProductCard({ product }) {
           </div>
         </div>
       </motion.div>
-    </Link>
+    </div>
   );
 }
 

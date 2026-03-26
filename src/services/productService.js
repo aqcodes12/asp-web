@@ -20,7 +20,14 @@ const normalizeColors = (colors) => {
 export const normalizeProduct = (product) => {
   const category = product.categoryId;
   const categoryName = category?.name_en || "Other";
-  const categoryId = category?.slug || categoryName.toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "other";
+  const categoryId =
+    category?.slug ||
+    categoryName
+      .toLowerCase()
+      .replace(/&/g, " and ")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") ||
+    "other";
 
   const sizes = product.variants?.sizes || [];
   const colors = normalizeColors(product.variants?.colors || []);
@@ -53,8 +60,25 @@ export const getProducts = async () => {
   return Array.isArray(list) ? list.map(normalizeProduct) : [];
 };
 
+export const getFeaturedProducts = async () => {
+  const response = await axios.get("/api/v1/product/get-products", {
+    params: { badge: "FEATURED" },
+  });
+  const list = response.data?.data || [];
+  return Array.isArray(list) ? list.map(normalizeProduct) : [];
+};
+
+export const getOfferProducts = async () => {
+  const response = await axios.get("/api/v1/product/get-products", {
+    params: { badge: "OFFER" },
+  });
+  const list = response.data?.data || [];
+  return Array.isArray(list) ? list.map(normalizeProduct) : [];
+};
+
 export const getProductById = async (id) => {
   const response = await axios.get(`/api/v1/product/get-productById/${id}`);
-  const product = response.data?.data || response.data?.product || response.data;
+  const product =
+    response.data?.data || response.data?.product || response.data;
   return product ? normalizeProduct(product) : null;
 };
