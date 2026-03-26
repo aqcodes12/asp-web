@@ -16,8 +16,23 @@ function ContactPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Contact form submitted:", formData);
-    alert(t("contact.form.success"));
+
+    const text = [
+      `*${t("contact.form.subject")}:* ${formData.subject}`,
+      `*${t("contact.form.fullName")}:* ${formData.name}`,
+      `*${t("contact.form.emailAddress")}:* ${formData.email}`,
+      `*${t("contact.form.phoneNumber")}:* ${formData.phone}`,
+      `*${t("contact.form.company")}:* ${formData.company}`,
+      "",
+      `*${t("contact.form.message")}:*`,
+      formData.message
+    ].join("\n");
+
+    window.open(
+      `https://wa.me/966138141130?text=${encodeURIComponent(text)}`,
+      "_blank"
+    );
+
     setFormData({
       name: "",
       email: "",
