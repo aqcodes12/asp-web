@@ -122,6 +122,8 @@ function ProductDetailPage() {
       url: window.location.href
     });
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+    setShareMessage(t("productDetail.whatsappSent", { defaultValue: "Message sent successfully" }));
+    setTimeout(() => setShareMessage(""), 2000);
   };
 
   const handleShareEmail = () => {

@@ -1,11 +1,10 @@
-import { X, Plus, Minus, Trash2, Phone, Check } from "lucide-react";
+import { X, Plus, Minus, Trash2, Phone, Check, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useCart } from "../context/CartContext";
 import { getSalesmen } from "../../services/salesmanService";
 import { createOrder } from "../../services/orderService";
-import { showSuccessToast } from "../../utils/toastConfig";
 
 function OrderFormModal({ isOpen, onClose, onSubmit, salesmen, salesmenLoading, isSubmitting }) {
   const { t } = useTranslation();
@@ -111,7 +110,7 @@ function OrderFormModal({ isOpen, onClose, onSubmit, salesmen, salesmenLoading, 
                           style={{ borderColor: "#1E5EFF", borderTopColor: "transparent" }}
                         />
                       </div>
-                    ) : (
+                    ) : salesmen.length <= 3 ? (
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                         {salesmen.map((salesman) => (
                           <button
@@ -170,6 +169,29 @@ function OrderFormModal({ isOpen, onClose, onSubmit, salesmen, salesmenLoading, 
                           </button>
                         ))}
                       </div>
+                    ) : (
+                      <select
+                        value={formData.selectedSalesmanId}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            selectedSalesmanId: e.target.value,
+                          })
+                        }
+                        className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2"
+                        style={{
+                          backgroundColor: "white",
+                          border: "1px solid #E2E8F0",
+                          color: "#1F2937",
+                        }}
+                      >
+                        <option value="">{t("cart.orderForm.selectSalesman", { defaultValue: "Select a salesman" })}</option>
+                        {salesmen.map((salesman) => (
+                          <option key={salesman._id} value={salesman._id}>
+                            {salesman.name}{salesman.phone ? ` — ${salesman.phone}` : ""}
+                          </option>
+                        ))}
+                      </select>
                     )}
                   </div>
 
@@ -331,10 +353,65 @@ function OrderFormModal({ isOpen, onClose, onSubmit, salesmen, salesmenLoading, 
                           : "none",
                     }}
                   >
-                    {isSubmitting ? t("common.submitting") || "Submitting..." : t("cart.orderForm.submit")}
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
+                        {t("common.submitting", { defaultValue: "Submitting..." })}
+                      </span>
+                    ) : t("cart.orderForm.submit")}
                   </button>
                 </form>
               </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function SuccessModal({ isOpen, onClose }) {
+  const { t } = useTranslation();
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/50 z-[60]"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-sm z-[60] mx-4"
+          >
+            <div
+              className="bg-white rounded-3xl p-8 text-center"
+              style={{ boxShadow: "0 24px 48px rgba(2, 12, 27, 0.2)" }}
+            >
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
+                style={{ backgroundColor: "#ECFDF5" }}
+              >
+                <CheckCircle2 className="w-8 h-8" style={{ color: "#10B981" }} />
+              </div>
+              <h3 className="text-lg mb-2" style={{ color: "#0A2540" }}>
+                {t("cart.orderSuccess.title", { defaultValue: "Thank You!" })}
+              </h3>
+              <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
+                {t("cart.orderSuccess.message", { defaultValue: "Your enquiry has been submitted successfully" })}
+              </p>
+              <button
+                onClick={onClose}
+                className="w-full py-3 rounded-xl transition-all hover:opacity-90"
+                style={{ backgroundColor: "#1E5EFF", color: "white" }}
+              >
+                {t("common.close", { defaultValue: "Close" })}
+              </button>
             </div>
           </motion.div>
         </>
@@ -354,6 +431,7 @@ function CartDrawer() {
     clearCart,
   } = useCart();
   const [showOrderForm, setShowOrderForm] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [salesmen, setSalesmen] = useState([]);
   const [salesmenLoading, setSalesmenLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -395,10 +473,10 @@ function CartDrawer() {
         }),
       };
       await createOrder(payload);
-      showSuccessToast(t("cart.orderSubmitted"));
       clearCart();
       setShowOrderForm(false);
       setIsCartOpen(false);
+      setShowSuccess(true);
     } catch {
       // error toast handled by axios interceptor
     } finally {
@@ -627,6 +705,11 @@ function CartDrawer() {
         salesmen={salesmen}
         salesmenLoading={salesmenLoading}
         isSubmitting={isSubmitting}
+      />
+
+      <SuccessModal
+        isOpen={showSuccess}
+        onClose={() => setShowSuccess(false)}
       />
     </>
   );

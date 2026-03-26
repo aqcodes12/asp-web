@@ -1,5 +1,5 @@
-import { useMemo, useState, useEffect } from "react";
-import { useSearchParams } from "react-router";
+import { useMemo, useState, useEffect, useRef, useCallback } from "react";
+import { useSearchParams, useNavigate } from "react-router";
 import { Search } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
@@ -14,14 +14,49 @@ const getProductName = (product, language) => {
 
 function ProductsPage() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "all");
   const [sortBy, setSortBy] = useState("name");
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const searchRef = useRef(null);
   const isRTL = i18n.dir() === "rtl";
+
+  // Debounce search query (300ms)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+      setShowSuggestions(searchQuery.length > 0);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  // Close suggestions on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const suggestions = useMemo(() => {
+    if (!debouncedQuery) return [];
+    const query = debouncedQuery.toLowerCase();
+    return products
+      .filter((p) =>
+        getProductName(p, i18n.language).toLowerCase().includes(query) ||
+        p.code.toLowerCase().includes(query)
+      )
+      .slice(0, 6);
+  }, [debouncedQuery, products, i18n.language]);
 
   useEffect(() => {
     setLoading(true);
@@ -42,8 +77,8 @@ function ProductsPage() {
       filtered = filtered.filter((product) => product.category === selectedCategory);
     }
 
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
+    if (debouncedQuery) {
+      const query = debouncedQuery.toLowerCase();
       filtered = filtered.filter((product) => getProductName(product, i18n.language).toLowerCase().includes(query) || product.code.toLowerCase().includes(query) || product.categoryName.toLowerCase().includes(query));
     }
 
@@ -60,7 +95,7 @@ function ProductsPage() {
     });
 
     return filtered;
-  }, [products, i18n.language, searchQuery, selectedCategory, sortBy]);
+  }, [products, i18n.language, debouncedQuery, selectedCategory, sortBy]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -90,23 +125,55 @@ function ProductsPage() {
           <p style={{ color: "#6B7280" }}>{t("products.subtitle")}</p>
         </div>
 
-        <div className="mb-8">
+        <div className="mb-8" ref={searchRef}>
           <div className="relative">
             <Search className={`absolute top-1/2 -translate-y-1/2 w-5 h-5 ${isRTL ? "right-4" : "left-4"}`} style={{ color: "#6B7280" }} />
             <input
-    type="text"
-    placeholder={t("products.searchPlaceholder")}
-    value={searchQuery}
-    onChange={(event) => setSearchQuery(event.target.value)}
-    className={`w-full py-4 rounded-xl focus:outline-none focus:ring-2 ${isRTL ? "pr-12 pl-4" : "pl-12 pr-4"}`}
-    style={{
-      backgroundColor: "white",
-      border: "1px solid #E2E8F0",
-      color: "#1F2937"
-    }}
-    onFocus={(event) => event.currentTarget.style.borderColor = "#1E5EFF"}
-    onBlur={(event) => event.currentTarget.style.borderColor = "#E2E8F0"}
-  />
+              type="text"
+              placeholder={t("products.searchPlaceholder")}
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              onFocus={() => { if (searchQuery) setShowSuggestions(true); }}
+              className={`w-full py-4 rounded-xl focus:outline-none focus:ring-2 ${isRTL ? "pr-12 pl-4" : "pl-12 pr-4"}`}
+              style={{
+                backgroundColor: "white",
+                border: "1px solid #E2E8F0",
+                color: "#1F2937"
+              }}
+            />
+
+            {showSuggestions && suggestions.length > 0 && (
+              <div
+                className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl overflow-hidden z-30"
+                style={{ border: "1px solid #E2E8F0", boxShadow: "0 8px 24px rgba(15, 23, 42, 0.12)" }}
+              >
+                {suggestions.map((product) => (
+                  <button
+                    key={product.id}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-start transition-colors hover:bg-[#F8FAFC]"
+                    onClick={() => {
+                      setShowSuggestions(false);
+                      navigate(`/products/${product.id}`);
+                    }}
+                  >
+                    {product.image && (
+                      <img
+                        src={product.image}
+                        alt=""
+                        className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
+                        style={{ backgroundColor: "#F1F5F9" }}
+                      />
+                    )}
+                    <div className="min-w-0">
+                      <p className="text-sm truncate" style={{ color: "#0A2540" }}>
+                        {getProductName(product, i18n.language)}
+                      </p>
+                      <p className="text-xs" style={{ color: "#6B7280" }}>{product.code}</p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
