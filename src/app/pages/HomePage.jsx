@@ -146,7 +146,7 @@ function HomePage() {
           <p style={{ color: "#6B7280" }}>{t("home.categories.subtitle")}</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           {homepageCategories.map((category, index) => <motion.div
     key={category.id}
     initial={{ opacity: 0, y: 20 }}
