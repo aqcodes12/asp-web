@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getCategories = async () => {
-  const response = await axios.get("/api/v1/category/get-category");
+  const response = await axios.get("/api/v1/category/getPublicCategory");
   const list = response.data?.data || [];
   return Array.isArray(list)
     ? list

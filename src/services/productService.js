@@ -53,7 +53,7 @@ export const normalizeProduct = (product) => {
 };
 
 export const getProducts = async () => {
-  const response = await axios.get("/api/v1/product/get-products", {
+  const response = await axios.get("/api/v1/product/getPublicProducts", {
     params: { status: "ACTIVE" },
   });
   const list = response.data?.data || [];
@@ -61,7 +61,7 @@ export const getProducts = async () => {
 };
 
 export const getFeaturedProducts = async () => {
-  const response = await axios.get("/api/v1/product/get-products", {
+  const response = await axios.get("/api/v1/product/getPublicProducts", {
     params: { badge: "FEATURED" },
   });
   const list = response.data?.data || [];
@@ -69,7 +69,7 @@ export const getFeaturedProducts = async () => {
 };
 
 export const getOfferProducts = async () => {
-  const response = await axios.get("/api/v1/product/get-products", {
+  const response = await axios.get("/api/v1/product/getPublicProducts", {
     params: { badge: "OFFER" },
   });
   const list = response.data?.data || [];
