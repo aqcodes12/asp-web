@@ -77,7 +77,7 @@ export const getOfferProducts = async () => {
 };
 
 export const getProductById = async (id) => {
-  const response = await axios.get(`/api/v1/product/get-productById/${id}`);
+  const response = await axios.get(`/api/v1/product/getPublicProductByID/${id}`);
   const product =
     response.data?.data || response.data?.product || response.data;
   return product ? normalizeProduct(product) : null;
