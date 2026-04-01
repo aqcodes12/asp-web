@@ -1,10 +1,18 @@
 import { Link } from "react-router";
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
+import { getCategories } from "../../services/categoryService";
 import aspLogo from "../../assets/asp.png";
 
 function Footer() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language.startsWith("ar");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getCategories().then((list) => setCategories(list.slice(0, 5))).catch(() => {});
+  }, []);
 
   return (
     <footer style={{ backgroundColor: "#0A2540" }}>
@@ -47,19 +55,14 @@ function Footer() {
               {t("common.categories")}
             </h4>
             <div className="flex flex-col gap-2.5">
-              {[
-                { to: "/products?category=surgical", label: t("categories.surgical") },
-                { to: "/products?category=diagnostic", label: t("categories.diagnostic") },
-                { to: "/products?category=ppe", label: t("categories.ppe") },
-                { to: "/products?category=lab", label: t("categories.lab") },
-              ].map(({ to, label }) => (
+              {categories.map((cat) => (
                 <Link
-                  key={to}
-                  to={to}
+                  key={cat.id}
+                  to={`/products?category=${cat.id}`}
                   className="text-sm transition-colors duration-200 hover:text-white flex items-center gap-1 group"
                   style={{ color: "#64748B" }}
                 >
-                  {label}
+                  {isArabic ? (cat.name_ar || cat.name) : cat.name}
                   <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-px" />
                 </Link>
               ))}
