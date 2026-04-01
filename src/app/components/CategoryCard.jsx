@@ -2,10 +2,9 @@ import { Link } from "react-router";
 import { motion } from "motion/react";
 import { useState } from "react";
 
-function CategoryCard({ id, name }) {
+function CategoryCard({ id, name, image }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Generate a consistent accent from the name
   const colors = [
     { from: "#1E5EFF", to: "#00B8D9" },
     { from: "#00B8D9", to: "#06B6D4" },
@@ -25,46 +24,61 @@ function CategoryCard({ id, name }) {
   return (
     <Link to={`/products?category=${id}`} className="block">
       <motion.div
-        className="relative bg-white rounded-2xl overflow-hidden cursor-pointer"
+        className="bg-white rounded-2xl overflow-hidden cursor-pointer flex flex-col items-center text-center"
         style={{
           border: isHovered ? "1px solid #1E5EFF" : "1px solid #E2E8F0",
           boxShadow: isHovered
             ? "0 12px 28px rgba(30, 94, 255, 0.16)"
             : "0 2px 10px rgba(15, 23, 42, 0.05)",
           transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-          minWidth: "120px",
+          width: "140px",
+          height: "160px",
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         whileHover={{ y: -4 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
-        {/* Top gradient bar */}
+        {/* Image area */}
         <div
-          className="h-1 w-full"
+          className="w-full flex items-center justify-center"
           style={{
-            background: `linear-gradient(90deg, ${accent.from}, ${accent.to})`,
-            opacity: isHovered ? 1 : 0.5,
-            transition: "opacity 0.2s ease",
+            background: isHovered
+              ? `linear-gradient(135deg, ${accent.from}18, ${accent.to}18)`
+              : "#F8FAFC",
+            padding: "20px 16px 16px",
+            transition: "background 0.2s ease",
           }}
-        />
+        >
+          {image ? (
+            <img
+              src={image}
+              alt={name}
+              className="w-16 h-16 object-contain transition-transform duration-200"
+              style={{ transform: isHovered ? "scale(1.08)" : "scale(1)" }}
+            />
+          ) : (
+            <div
+              className="w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold transition-all duration-200"
+              style={{
+                background: isHovered
+                  ? `linear-gradient(135deg, ${accent.from}, ${accent.to})`
+                  : "#EFF6FF",
+                color: isHovered ? "white" : accent.from,
+              }}
+            >
+              {initials}
+            </div>
+          )}
+        </div>
 
-        <div className="px-5 py-4 flex items-center gap-3">
-          {/* Initials bubble */}
-          <div
-            className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 text-sm font-bold transition-all duration-200"
-            style={{
-              background: isHovered
-                ? `linear-gradient(135deg, ${accent.from}, ${accent.to})`
-                : "#EFF6FF",
-              color: isHovered ? "white" : accent.from,
-            }}
-          >
-            {initials}
-          </div>
-
+        {/* Name */}
+        <div
+          className="w-full px-3 py-3"
+          style={{ borderTop: "1px solid #F1F5F9" }}
+        >
           <p
-            className="text-sm font-semibold leading-tight transition-colors duration-200"
+            className="text-xs font-semibold leading-snug transition-colors duration-200"
             style={{ color: isHovered ? "#1E5EFF" : "#0A2540" }}
           >
             {name}

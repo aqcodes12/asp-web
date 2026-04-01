@@ -11,6 +11,7 @@ export const getCategories = async () => {
           id: cat._id,
           name: cat.name_en,
           name_ar: cat.name_ar,
+          image: cat.image || "",
         }))
     : [];
 };
