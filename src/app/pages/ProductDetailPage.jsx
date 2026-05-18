@@ -190,13 +190,15 @@ function ProductDetailPage() {
             <div className="bg-white rounded-2xl p-7" style={{ border: "1px solid #E2E8F0", boxShadow: "0 4px 20px rgba(15,23,42,0.07)" }}>
               {/* Badge & Category */}
               <div className="flex items-center gap-2 mb-3">
-                <span
-                  className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
-                  style={{ backgroundColor: "#FEF3C7", color: "#B45309" }}
-                >
-                  <Tag className="w-3 h-3" />
-                  {product.badge || "NEW"}
-                </span>
+                {product.badge && product.badge.toLowerCase() !== "none" && (
+                  <span
+                    className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
+                    style={{ backgroundColor: "#FEF3C7", color: "#B45309" }}
+                  >
+                    <Tag className="w-3 h-3" />
+                    {product.badge}
+                  </span>
+                )}
                 <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: "#E6F7FB", color: "#00B8D9" }}>
                   {productCategory}
                 </span>

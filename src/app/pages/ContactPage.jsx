@@ -181,7 +181,7 @@ function ContactPage() {
             <div className="bg-white p-4 rounded-2xl" style={{ border: "1px solid #E2E8F0", boxShadow: "0 4px 20px rgba(15,23,42,0.06)" }}>
               <h3 className="mb-4 text-sm font-semibold px-2" style={{ color: "#0A2540" }}>{t("contact.map.title")}</h3>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3574.040854970368!2d50.1665878!3d26.389867699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49e56c380d3d53%3A0x87225b79c2ee99a7!2sUltra%20Industrial%20Services%20(UIS)!5e0!3m2!1sen!2sin!4v1772381347110!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3574.040854970368!2d50.1665878!3d26.389867699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49e56c380d3d53%3A0x87225b79c2ee99a7!2sAdvanced%20Specialty%20Projects%20Trading%20Est.!5e0!3m2!1sen!2sin!4v1772381347110!5m2!1sen!2sin"
                 style={{ border: 0, width: "100%", minHeight: "420px", borderRadius: "12px" }}
                 allowFullScreen
                 loading="lazy"

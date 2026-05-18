@@ -563,7 +563,7 @@ function CartDrawer() {
 
                       return (
                         <div
-                          key={item.id}
+                          key={item.cartItemId}
                           className="flex gap-4 p-5 rounded-2xl"
                           style={{
                             backgroundColor: "#F8FAFC",
@@ -607,7 +607,7 @@ function CartDrawer() {
                             <div className="flex items-center gap-2">
                               <button
                                 onClick={() =>
-                                  updateQuantity(item.id, item.quantity - 1)
+                                  updateQuantity(item.cartItemId, item.quantity - 1)
                                 }
                                 className="w-6 h-6 rounded-lg flex items-center justify-center"
                                 style={{
@@ -628,7 +628,7 @@ function CartDrawer() {
                               </span>
                               <button
                                 onClick={() =>
-                                  updateQuantity(item.id, item.quantity + 1)
+                                  updateQuantity(item.cartItemId, item.quantity + 1)
                                 }
                                 className="w-6 h-6 rounded-lg flex items-center justify-center"
                                 style={{
@@ -642,7 +642,7 @@ function CartDrawer() {
                                 />
                               </button>
                               <button
-                                onClick={() => removeFromCart(item.id)}
+                                onClick={() => removeFromCart(item.cartItemId)}
                                 className="ml-auto hover:opacity-70"
                                 aria-label={t("cart.remove")}
                               >

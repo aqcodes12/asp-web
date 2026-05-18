@@ -28,6 +28,7 @@ function ProductCard({ product }) {
 
   const productName = getProductName(product, i18n.language) || t(product.nameKey);
   const categoryLabel = product.categoryName || t(`categories.${product.category}`, { defaultValue: product.category });
+  const showBadge = product.badge && product.badge.toLowerCase() !== "none";
   const badgeKey = (product.badge || "NEW").toLowerCase();
   const badgeLabel = t(`productCard.badges.${badgeKey}`, { defaultValue: product.badge || "NEW" });
   const currentBadgeStyle = badgeStyles[badgeKey] || badgeStyles.new;
@@ -96,12 +97,14 @@ function ProductCard({ product }) {
           />
 
           {/* Badge */}
-          <span
-            className="absolute top-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wide"
-            style={currentBadgeStyle}
-          >
-            {badgeLabel}
-          </span>
+          {showBadge && (
+            <span
+              className="absolute top-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wide"
+              style={currentBadgeStyle}
+            >
+              {badgeLabel}
+            </span>
+          )}
 
           {/* Share */}
           <motion.button

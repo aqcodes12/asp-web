@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "motion/react";
 import aspLogo from "../../assets/asp.png";
+import fullLogo from "../../assets/fulllogo.png";
 
 function Navbar() {
   const { t, i18n } = useTranslation();
@@ -47,9 +48,14 @@ function Navbar() {
         <div className="flex justify-between items-center h-[68px]">
           <Link to="/" className="flex items-center group">
             <img
+              src={fullLogo}
+              alt="ASP logo"
+              className="hidden md:block h-9 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
+            />
+            <img
               src={aspLogo}
               alt="ASP logo"
-              className="h-9 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
+              className="md:hidden h-9 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
             />
           </Link>
 
@@ -61,7 +67,12 @@ function Navbar() {
               { to: "/about", label: t("nav.about") },
               { to: "/contact", label: t("nav.contact") },
             ].map(({ to, end, label }) => (
-              <NavLink key={to} to={to} end={end} className={getDesktopNavLinkClassName}>
+              <NavLink
+                key={to}
+                to={to}
+                end={end}
+                className={getDesktopNavLinkClassName}
+              >
                 {({ isActive }) => (
                   <>
                     {label}
@@ -83,7 +94,11 @@ function Navbar() {
             <button
               onClick={toggleLanguage}
               className="px-3 py-1.5 rounded-lg border text-xs font-bold tracking-wide transition-all duration-200 hover:shadow-sm mr-1"
-              style={{ borderColor: "#BFDBFE", color: "#1E5EFF", backgroundColor: "#EFF6FF" }}
+              style={{
+                borderColor: "#BFDBFE",
+                color: "#1E5EFF",
+                backgroundColor: "#EFF6FF",
+              }}
               aria-label={t("nav.toggleLanguage")}
             >
               {isArabic ? "EN" : "AR"}
@@ -93,18 +108,26 @@ function Navbar() {
               className="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-[#F1F5F9] transition-colors duration-200"
               aria-label="Search products"
             >
-              <Search className="w-[18px] h-[18px]" style={{ color: "#64748B" }} />
+              <Search
+                className="w-[18px] h-[18px]"
+                style={{ color: "#64748B" }}
+              />
             </Link>
             <button
               onClick={() => setIsCartOpen(true)}
               className="relative w-9 h-9 rounded-lg flex items-center justify-center hover:bg-[#F1F5F9] transition-colors duration-200"
               aria-label="Open cart"
             >
-              <ShoppingCart className="w-[18px] h-[18px]" style={{ color: "#64748B" }} />
+              <ShoppingCart
+                className="w-[18px] h-[18px]"
+                style={{ color: "#64748B" }}
+              />
               {cartCount > 0 && (
                 <span
                   className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full text-white text-[9px] font-bold flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, #1E5EFF, #00B8D9)" }}
+                  style={{
+                    background: "linear-gradient(135deg, #1E5EFF, #00B8D9)",
+                  }}
                 >
                   {cartCount}
                 </span>

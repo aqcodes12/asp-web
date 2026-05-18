@@ -5,26 +5,27 @@ const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const addToCart = (item, quantity) => {
     setCartItems((prev) => {
-      const existingItem = prev.find((i) => i.id === item.id);
+      const cartItemId = `${item.id}__${item.size || ""}__${item.color || ""}`;
+      const existingItem = prev.find((i) => i.cartItemId === cartItemId);
       if (existingItem) {
         return prev.map(
-          (i) => i.id === item.id ? { ...i, quantity: i.quantity + quantity } : i
+          (i) => i.cartItemId === cartItemId ? { ...i, quantity: i.quantity + quantity } : i
         );
       }
-      return [...prev, { ...item, quantity }];
+      return [{ ...item, cartItemId, quantity }, ...prev];
     });
     setIsCartOpen(true);
   };
-  const removeFromCart = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  const removeFromCart = (cartItemId) => {
+    setCartItems((prev) => prev.filter((item) => item.cartItemId !== cartItemId));
   };
-  const updateQuantity = (id, quantity) => {
+  const updateQuantity = (cartItemId, quantity) => {
     if (quantity <= 0) {
-      removeFromCart(id);
+      removeFromCart(cartItemId);
       return;
     }
     setCartItems(
-      (prev) => prev.map((item) => item.id === id ? { ...item, quantity } : item)
+      (prev) => prev.map((item) => item.cartItemId === cartItemId ? { ...item, quantity } : item)
     );
   };
   const clearCart = () => {
