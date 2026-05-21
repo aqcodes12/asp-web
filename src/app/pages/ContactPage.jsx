@@ -87,9 +87,10 @@ function ContactPage() {
               icon: Phone, color: "#1E5EFF", bg: "#EFF6FF",
               title: t("contact.info.contactUs"),
               lines: [
-                `${t("contact.info.telephone")}: +966-13-814 1130`,
-                `${t("contact.info.telefax")}: +966-13-814 4588`,
+                `${t("contact.info.telephone")}: +966-13-8100344 / 8144770 / 8141130`,
+                `${t("contact.info.telefax")}: +966-13-8144588`,
                 `${t("contact.info.email")}: info@aspksa.com`,
+                `Web: www.aspksa.com`,
               ],
             },
             {

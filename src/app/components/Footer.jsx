@@ -110,7 +110,7 @@ function Footer() {
                 </span>
               </a>
               <a
-                href="tel:+966138141130"
+                href="tel:+966138100344"
                 className="flex items-start gap-2.5 group"
               >
                 <div
@@ -123,7 +123,7 @@ function Footer() {
                   className="text-sm transition-colors duration-200 group-hover:text-white"
                   style={{ color: "#64748B" }}
                 >
-                  +966-13-814 1130
+                  +966-13-8100344
                 </span>
               </a>
               <div className="flex items-start gap-2.5">
