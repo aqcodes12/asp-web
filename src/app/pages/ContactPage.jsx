@@ -80,37 +80,53 @@ function ContactPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="grid md:grid-cols-2 gap-5 mb-12"
+          className="mb-12"
         >
-          {[
-            {
-              icon: Phone, color: "#1E5EFF", bg: "#EFF6FF",
-              title: t("contact.info.contactUs"),
-              lines: [
-                `${t("contact.info.telephone")}: +966-13-8100344 / 8144770 / 8141130`,
-                `${t("contact.info.telefax")}: +966-13-8144588`,
-                `${t("contact.info.email")}: info@aspksa.com`,
-                `Web: www.aspksa.com`,
-              ],
-            },
-            {
-              icon: MapPin, color: "#00B8D9", bg: "#E6F7FB",
-              title: t("contact.info.visitUs"),
-              lines: [t("contact.info.address")],
-            },
-          ].map(({ icon: Icon, color, bg, title, lines }) => (
-            <div key={title} className="bg-white p-6 rounded-2xl flex gap-4" style={{ border: "1px solid #E2E8F0", boxShadow: "0 2px 12px rgba(15,23,42,0.05)" }}>
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: bg }}>
-                <Icon className="w-5 h-5" style={{ color }} />
+          <div className="bg-white rounded-2xl overflow-hidden" style={{ border: "1px solid #E2E8F0", boxShadow: "0 2px 12px rgba(15,23,42,0.05)" }}>
+            <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x" style={{ "--tw-divide-opacity": 1, borderColor: "#F1F5F9" }}>
+
+              {/* Contact Us */}
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#EFF6FF" }}>
+                    <Phone className="w-4 h-4" style={{ color: "#1E5EFF" }} />
+                  </div>
+                  <h3 className="text-sm font-semibold" style={{ color: "#0A2540" }}>{t("contact.info.contactUs")}</h3>
+                </div>
+                <div style={{ borderTop: "1px solid #F1F5F9" }}>
+                  {[
+                    { label: t("contact.info.telephone"), value: "+966-13-8100344 / 8144770 / 8141130", href: "tel:+966138100344" },
+                    { label: t("contact.info.telefax"), value: "+966-13-8144588", href: null },
+                    { label: t("contact.info.email"), value: "info@aspksa.com", href: "mailto:info@aspksa.com" },
+                    { label: "Web", value: "www.aspksa.com", href: "https://www.aspksa.com" },
+                  ].map(({ label, value, href }) => (
+                    <div key={label} className="flex items-center justify-between gap-4 py-2.5" style={{ borderBottom: "1px solid #F1F5F9" }}>
+                      <span className="text-xs font-medium flex-shrink-0 w-20" style={{ color: "#94A3B8" }}>{label}</span>
+                      {href ? (
+                        <a href={href} target={href.startsWith("https") ? "_blank" : undefined} rel="noopener noreferrer" className="text-sm font-medium text-right hover:underline" style={{ color: "#0A2540" }}>
+                          {value}
+                        </a>
+                      ) : (
+                        <span className="text-sm font-medium text-right" style={{ color: "#0A2540" }}>{value}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div>
-                <h3 className="mb-2 text-sm font-semibold" style={{ color: "#0A2540" }}>{title}</h3>
-                {lines.map((line) => (
-                  <p key={line} className="text-sm" style={{ color: "#475569" }}>{line}</p>
-                ))}
+
+              {/* Visit Us */}
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#E6F7FB" }}>
+                    <MapPin className="w-4 h-4" style={{ color: "#00B8D9" }} />
+                  </div>
+                  <h3 className="text-sm font-semibold" style={{ color: "#0A2540" }}>{t("contact.info.visitUs")}</h3>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>{t("contact.info.address")}</p>
               </div>
+
             </div>
-          ))}
+          </div>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 items-start">
@@ -182,7 +198,7 @@ function ContactPage() {
             <div className="bg-white p-4 rounded-2xl" style={{ border: "1px solid #E2E8F0", boxShadow: "0 4px 20px rgba(15,23,42,0.06)" }}>
               <h3 className="mb-4 text-sm font-semibold px-2" style={{ color: "#0A2540" }}>{t("contact.map.title")}</h3>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3574.040854970368!2d50.1665878!3d26.389867699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49e56c380d3d53%3A0x87225b79c2ee99a7!2sAdvanced%20Specialty%20Projects%20Trading%20Est.!5e0!3m2!1sen!2sin!4v1772381347110!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3574.044692!2d50.1665781!3d26.3898625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e361d32276b3403%3A0xc8c2119535675e44!2sAdvanced%20Specialty%20Projects%20Trading%20Est.!5e0!3m2!1sen!2ssa!4v1747814400000!5m2!1sen!2ssa"
                 style={{ border: 0, width: "100%", minHeight: "420px", borderRadius: "12px" }}
                 allowFullScreen
                 loading="lazy"
