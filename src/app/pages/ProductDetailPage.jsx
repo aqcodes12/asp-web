@@ -52,6 +52,10 @@ function ProductDetailPage() {
       .finally(() => setLoading(false));
   }, [id]);
 
+  useEffect(() => {
+    setQuantity(1);
+  }, [selectedSize, selectedColor]);
+
   const sizeOptions = Array.isArray(product?.sizes) ? product.sizes : [];
   const colorOptions = Array.isArray(product?.colors) ? product.colors : [];
   const requiresSize = sizeOptions.length > 0;

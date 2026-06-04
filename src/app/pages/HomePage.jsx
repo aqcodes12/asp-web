@@ -7,7 +7,7 @@ import { CategoryCard } from "../components/CategoryCard";
 import { ProductCard } from "../components/ProductCard";
 import { getFeaturedProducts } from "../../services/productService";
 import { getCategories } from "../../services/categoryService";
-import heroImage from "../../assets/hero.jpeg";
+import heroImage from "../../assets/image.png";
 
 function SectionTitle({ label, title, subtitle }) {
   return (
